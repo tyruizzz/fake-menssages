@@ -6,279 +6,190 @@
 <title>WhatsApp Fake Chat</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-
 body{
-  font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',sans-serif;
-  background:#111b21;
-  display:flex;
-  height:100vh;
-  overflow:hidden;
-  color:#fff;
+  font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;
+  background:#111b21;display:flex;height:100vh;overflow:hidden;color:#fff;
 }
 
-/* ══════════════════════════════
-   PANEL EDITOR
-══════════════════════════════ */
+/* ════════════ PANEL ════════════ */
 #panel{
-  width:330px;min-width:270px;
-  background:#202c33;
-  display:flex;flex-direction:column;
-  overflow-y:auto;
-  border-right:1px solid #2a3942;
-  flex-shrink:0;
+  width:330px;min-width:270px;background:#202c33;
+  display:flex;flex-direction:column;overflow-y:auto;
+  border-right:1px solid #2a3942;flex-shrink:0;
 }
 #panel::-webkit-scrollbar{width:3px;}
 #panel::-webkit-scrollbar-thumb{background:#2a3942;border-radius:3px;}
-
-.p-hd{
-  padding:12px 14px 9px;
-  font-size:11.5px;font-weight:700;color:#8696a0;
-  text-transform:uppercase;letter-spacing:.9px;
-  border-bottom:1px solid #2a3942;background:#182229;flex-shrink:0;
-}
+.p-hd{padding:12px 13px 9px;font-size:11px;font-weight:700;color:#8696a0;text-transform:uppercase;letter-spacing:.9px;border-bottom:1px solid #2a3942;background:#182229;flex-shrink:0;}
 .sec{padding:10px 13px;border-bottom:1px solid #2a3942;}
-.lbl{font-size:10.5px;color:#8696a0;font-weight:600;margin-bottom:6px;letter-spacing:.5px;text-transform:uppercase;}
-
-input[type=text],input[type=time],textarea{
-  width:100%;background:#2a3942;border:1px solid #3b4a54;
-  border-radius:7px;color:#e9edef;font-size:13.5px;
-  padding:7px 10px;outline:none;font-family:inherit;
-  transition:border-color .15s;
-}
+.lbl{font-size:10px;color:#8696a0;font-weight:700;margin-bottom:6px;letter-spacing:.6px;text-transform:uppercase;}
+input[type=text],input[type=time],textarea{width:100%;background:#2a3942;border:1px solid #3b4a54;border-radius:7px;color:#e9edef;font-size:13.5px;padding:7px 10px;outline:none;font-family:inherit;transition:border-color .15s;}
 input:focus,textarea:focus{border-color:#00a884;}
 textarea{resize:vertical;min-height:50px;}
-
 .crow{display:flex;gap:10px;align-items:center;}
-#avPrev{
-  width:48px;height:48px;border-radius:50%;
-  object-fit:cover;border:2px solid #00a884;
-  cursor:pointer;flex-shrink:0;
-}
-
+#avPrev{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid #00a884;cursor:pointer;flex-shrink:0;}
 .pills{display:flex;gap:5px;}
-.pill{
-  flex:1;text-align:center;padding:6px 3px;
-  border-radius:7px;border:1px solid #3b4a54;
-  cursor:pointer;font-size:11.5px;color:#8696a0;
-  transition:all .15s;user-select:none;white-space:nowrap;
-}
+.pill{flex:1;text-align:center;padding:6px 3px;border-radius:7px;border:1px solid #3b4a54;cursor:pointer;font-size:11.5px;color:#8696a0;transition:all .15s;user-select:none;}
 .pill.on{background:#00a884;border-color:#00a884;color:#fff;font-weight:700;}
-
 .ewrap{display:flex;flex-wrap:wrap;gap:2px;margin-top:7px;}
 .ewrap span{font-size:18px;cursor:pointer;padding:2px;border-radius:4px;}
 .ewrap span:hover{background:#2a3942;}
-
-.fbtn{
-  width:100%;padding:8px;border-radius:7px;
-  border:1.5px dashed #3b4a54;background:transparent;
-  color:#8696a0;font-size:12.5px;cursor:pointer;
-  font-family:inherit;transition:.15s;
-}
+.fbtn{width:100%;padding:8px;border-radius:7px;border:1.5px dashed #3b4a54;background:transparent;color:#8696a0;font-size:12.5px;cursor:pointer;font-family:inherit;transition:.15s;}
 .fbtn:hover{border-color:#00a884;color:#00a884;}
-
-#btnAdd{
-  width:100%;padding:9px;border-radius:7px;border:none;
-  background:#00a884;color:#fff;font-size:13.5px;font-weight:700;
-  cursor:pointer;font-family:inherit;
-}
+#btnAdd{width:100%;padding:9px;border-radius:7px;border:none;background:#00a884;color:#fff;font-size:13.5px;font-weight:700;cursor:pointer;font-family:inherit;}
 #btnAdd:hover{background:#017a62;}
 .arow{display:flex;gap:6px;padding:10px 13px;}
 .arow button{flex:1;padding:8px;border-radius:7px;border:none;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;}
 #btnClear{background:#2a3942;color:#ef4444;}
 #btnSave{background:#1d4ed8;color:#fff;}
 
-/* ══════════════════════════════
-   PREVIEW AREA
-══════════════════════════════ */
-#preview{
-  flex:1;display:flex;align-items:stretch;justify-content:center;
-  overflow:hidden;background:#0b141a;
-}
-.wa-screen{
-  width:100%;max-width:500px;
-  display:flex;flex-direction:column;
-  background:#0b141a;
-}
+/* ════════════ PREVIEW ════════════ */
+#preview{flex:1;display:flex;align-items:stretch;justify-content:center;overflow:hidden;background:#0b141a;}
+.wa-screen{width:100%;max-width:500px;display:flex;flex-direction:column;background:#0b141a;}
 
-/* ── HEADER ── */
+/* ── HEADER — fiel al screenshot: ‹ 25 avatar(borde verde) nombre | cam tel ⋮ ── */
 .wa-hdr{
   background:#202c33;
   display:flex;align-items:center;
-  padding:9px 12px 9px 8px;gap:7px;
+  padding:8px 12px 8px 6px;gap:8px;
   flex-shrink:0;
-  /* subtle bottom separator */
-  box-shadow:0 1px 0 #0004;
+  box-shadow:0 1px 3px #0006;
 }
-.wa-back{color:#aebac1;font-size:24px;flex-shrink:0;line-height:1;margin-right:2px;}
-.av-wrap{position:relative;flex-shrink:0;}
-#hdrAv{width:40px;height:40px;border-radius:50%;object-fit:cover;display:block;}
-.hdr-txt{flex:1;min-width:0;}
-.hdr-name{font-size:15.5px;font-weight:600;color:#e9edef;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.hdr-sub{font-size:13px;color:#00a884;margin-top:0px;}
-.hdr-ics{display:flex;gap:20px;align-items:center;}
-.hdr-ics svg{width:22px;height:22px;fill:#aebac1;}
+.hdr-back{color:#aebac1;font-size:26px;flex-shrink:0;line-height:1;margin-right:-2px;}
+.hdr-count{color:#aebac1;font-size:17px;font-weight:400;flex-shrink:0;margin-right:2px;}
+/* avatar with GREEN RING — exactly like your screenshot */
+.hdr-av-wrap{position:relative;flex-shrink:0;}
+#hdrAv{
+  width:40px;height:40px;border-radius:50%;object-fit:cover;display:block;
+  border:2px solid #00a884; /* green ring */
+}
+.hdr-txt{flex:1;min-width:0;padding-left:2px;}
+.hdr-name{font-size:16px;font-weight:600;color:#e9edef;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.hdr-sub{font-size:13px;color:#00a884;margin-top:0;}
+/* icons — camera box + phone exactly like your captures */
+.hdr-ics{display:flex;gap:22px;align-items:center;padding-right:2px;}
+.hdr-ics svg{width:23px;height:23px;fill:#aebac1;}
 
 /* ── CHAT BODY ── */
 .wa-body{
   flex:1;overflow-y:auto;
   padding:6px 6px 10px;
-  display:flex;flex-direction:column;
-  gap:0;
-
-  /* ★ REAL WA DARK WALLPAPER — doodle pattern */
+  display:flex;flex-direction:column;gap:0;
+  /* REAL WA wallpaper tile from WhatsApp Web CDN */
   background-color:#0b141a;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='370' height='370'%3E%3Crect width='370' height='370' fill='%230b141a'/%3E%3Cg fill='none' stroke='%23ffffff10' stroke-linecap='round' stroke-linejoin='round'%3E%3C!-- Row 1 --%3E%3Crect x='10' y='10' width='22' height='16' rx='3' stroke-width='1.3'/%3E%3Ccircle cx='21' cy='18' r='5' stroke-width='1.3'/%3E%3Crect x='13' y='7' width='5' height='3' rx='1' stroke-width='1.3'/%3E%3Cpath d='M60 12 L65 8 L70 12 L70 26 L60 26Z M64 26 L64 20 L66 20 L66 26' stroke-width='1.3'/%3E%3Ccircle cx='110' cy='18' r='9' stroke-width='1.3'/%3E%3Cpath d='M106 18 Q110 23 114 18' stroke-width='1.3'/%3E%3Ccircle cx='107' cy='16' r='1.5' stroke-width='1' fill='%23ffffff10'/%3E%3Ccircle cx='113' cy='16' r='1.5' stroke-width='1' fill='%23ffffff10'/%3E%3Cpath d='M155 10 L158 18 L167 18 L160 23 L163 31 L155 26 L147 31 L150 23 L143 18 L152 18Z' stroke-width='1.2'/%3E%3Cpath d='M200 8 C200 8 208 6 210 14 C210 22 202 28 198 24 C194 20 192 10 200 8Z' stroke-width='1.3'/%3E%3Cpath d='M200 24 L198 30' stroke-width='1.3'/%3E%3Cpath d='M246 10 L246 26 M246 10 L256 7 L256 23 M246 26 A3 3 0 1 0 252 26 A3 3 0 1 0 246 26 M256 23 A3 3 0 1 0 262 23 A3 3 0 1 0 256 23' stroke-width='1.3'/%3E%3Crect x='290' y='10' width='26' height='20' rx='4' stroke-width='1.3'/%3E%3Cpath d='M316 16 L326 11 L326 29 L316 24' stroke-width='1.3'/%3E%3Cpath d='M336 8 L340 18 L350 18 L342 24 L345 34 L336 28 L327 34 L330 24 L322 18 L332 18Z' stroke-width='1.2'/%3E%3C!-- Row 2 --%3E%3Cpath d='M10 60 C10 53 17 50 20 55 C23 50 30 53 30 60 C30 68 20 76 20 76 C20 76 10 68 10 60Z' stroke-width='1.3'/%3E%3Crect x='55' y='52' width='24' height='18' rx='10' stroke-width='1.3'/%3E%3Cpath d='M63 61 L63 65 M60 63 L66 63 M72 61 L75 64 M72 64 L75 61' stroke-width='1.3'/%3E%3Ccircle cx='110' cy='62' r='10' stroke-width='1.3'/%3E%3Cpath d='M104 60 L107 63 L115 55' stroke-width='1.3'/%3E%3Cpath d='M150 55 C152 48 162 46 165 54 C162 67 150 74 146 70 C142 66 148 55 150 55Z' stroke-width='1.3'/%3E%3Cpath d='M148 70 L145 77' stroke-width='1.3'/%3E%3Crect x='194' y='52' width='28' height='22' rx='3' stroke-width='1.3'/%3E%3Ccircle cx='208' cy='60' r='5' stroke-width='1.3'/%3E%3Cpath d='M197 52 L197 48 L203 48 L203 52' stroke-width='1.3'/%3E%3Cpath d='M240 50 L258 50 L262 56 L262 74 L236 74 L236 56Z' stroke-width='1.3'/%3E%3Cpath d='M244 62 L244 68 M241 65 L247 65 M253 62 L256 65 M253 65 L256 62' stroke-width='1.3'/%3E%3Ccircle cx='305' cy='62' r='11' stroke-width='1.3'/%3E%3Cpath d='M298 56 L312 56 L312 70 L298 70Z' stroke-width='1' stroke-dasharray='2 2'/%3E%3Cpath d='M340 52 L360 52 L360 72 L340 72Z M344 60 L344 64 M348 60 L348 64 M352 60 L352 64 M356 60 L356 64' stroke-width='1.3'/%3E%3C!-- Row 3 --%3E%3Ccircle cx='20' cy='115' r='10' stroke-width='1.3'/%3E%3Cpath d='M14 108 L12 100 L19 106 M26 108 L28 100 L21 106' stroke-width='1.3'/%3E%3Ccircle cx='17' cy='113' r='2' fill='%23ffffff10' stroke='none'/%3E%3Ccircle cx='23' cy='113' r='2' fill='%23ffffff10' stroke='none'/%3E%3Cpath d='M17 118 Q20 121 23 118' stroke-width='1.3'/%3E%3Cpath d='M62 100 L62 128 M62 100 L76 96 L76 124 M62 128 A4 4 0 1 0 70 128 A4 4 0 1 0 62 128 M76 124 A4 4 0 1 0 84 124 A4 4 0 1 0 76 124' stroke-width='1.3'/%3E%3Crect x='104' y='100' width='32' height='28' rx='5' stroke-width='1.3'/%3E%3Cpath d='M110 112 L110 118 M107 115 L113 115 M124 112 L127 115 M124 115 L127 112' stroke-width='1.3'/%3E%3Ccircle cx='120' cy='107' r='3' stroke-width='1.3'/%3E%3Cpath d='M152 100 C152 90 164 86 168 96 C164 112 152 120 147 116 C142 112 149 100 152 100Z' stroke-width='1.3'/%3E%3Ccircle cx='200' cy='112' r='12' stroke-width='1.3'/%3E%3Cpath d='M196 108 L200 104 L204 108' stroke-width='1.3'/%3E%3Cpath d='M200 104 L200 120' stroke-width='1.3'/%3E%3Ccircle cx='250' cy='112' r='12' stroke-width='1.3'/%3E%3Cpath d='M244 116 L250 120 L256 116' stroke-width='1.3'/%3E%3Cpath d='M250 120 L250 104' stroke-width='1.3'/%3E%3Cpath d='M295 95 C295 83 309 78 312 90 C309 108 295 117 290 113 C285 109 293 95 295 95Z M293 113 L290 121 M312 90 L318 87' stroke-width='1.3'/%3E%3Cpath d='M342 96 L360 96 C364 96 366 98 366 102 L366 118 C366 122 364 124 360 124 L342 124 C338 124 336 122 336 118 L336 102 C336 98 338 96 342 96Z' stroke-width='1.3'/%3E%3Cpath d='M344 110 Q351 118 358 110' stroke-width='1.3'/%3E%3Ccircle cx='344' cy='106' r='2' fill='%23ffffff10' stroke='none'/%3E%3Ccircle cx='358' cy='106' r='2' fill='%23ffffff10' stroke='none'/%3E%3C!-- Row 4 --%3E%3Cpath d='M10 162 L20 152 L30 162 M14 162 L14 175 L26 175 L26 162 M17 175 L17 168 L23 168 L23 175' stroke-width='1.3'/%3E%3Cpath d='M56 152 L76 152 L76 174 L56 174Z M60 152 L60 148 L72 148 L72 152 M58 162 L74 162' stroke-width='1.3'/%3E%3Ccircle cx='108' cy='163' r='11' stroke-width='1.3'/%3E%3Ccircle cx='108' cy='156' r='3' fill='%23ffffff10' stroke-width='1'/%3E%3Cpath d='M100 172 Q108 178 116 172' stroke-width='1.3'/%3E%3Ccircle cx='104' cy='162' r='2' fill='%23ffffff10' stroke='none'/%3E%3Ccircle cx='112' cy='162' r='2' fill='%23ffffff10' stroke='none'/%3E%3Cpath d='M150 155 L160 148 L170 155 L170 175 L150 175Z M158 175 L158 166 L162 166 L162 175' stroke-width='1.3'/%3E%3Cpath d='M200 148 C200 138 214 134 218 144 L218 162 C215 168 213 168 210 166 C207 164 200 168 200 162Z M209 144 C209 141 213 141 213 144' stroke-width='1.3'/%3E%3Ccircle cx='250' cy='163' r='11' stroke-width='1.3'/%3E%3Cpath d='M244 163 L250 157 L256 163 L250 169Z' stroke-width='1.3'/%3E%3Cpath d='M292 148 L312 148 C316 148 318 150 318 154 L318 172 C318 176 316 178 312 178 L292 178 C288 178 286 176 286 172 L286 154 C286 150 288 148 292 148Z' stroke-width='1.3'/%3E%3Cpath d='M294 156 L316 156 M294 163 L316 163 M294 170 L308 170' stroke-width='1.3'/%3E%3Cpath d='M336 150 L356 150 L360 156 L360 178 L332 178 L332 156Z' stroke-width='1.3'/%3E%3Ccircle cx='346' cy='166' r='5' stroke-width='1.3'/%3E%3Ccircle cx='354' cy='162' r='2' fill='%23ffffff10' stroke-width='1'/%3E%3C!-- Row 5 --%3E%3Ccircle cx='20' cy='215' r='11' stroke-width='1.3'/%3E%3Cpath d='M14 210 L20 204 L26 210' stroke-width='1.3'/%3E%3Cpath d='M20 204 L20 222' stroke-width='1.3'/%3E%3Ccircle cx='67' cy='215' r='11' stroke-width='1.3'/%3E%3Cpath d='M61 218 L67 224 L73 218 M67 224 L67 206' stroke-width='1.3'/%3E%3Cpath d='M105 205 L120 198 L122 210 L110 228 L100 218Z M120 198 L128 200 M118 206 L110 228' stroke-width='1.3'/%3E%3Ccircle cx='118' cy='202' r='3' fill='%23ffffff10' stroke-width='1'/%3E%3Ccircle cx='152' cy='215' r='11' stroke-width='1.3'/%3E%3Cpath d='M147 210 L157 210 L157 220 L147 220Z M149 210 L149 207 L155 207 L155 210' stroke-width='1.3'/%3E%3Ccircle cx='152' cy='215' r='4' stroke-width='1.3'/%3E%3Cpath d='M200 204 L200 226 M192 215 L208 215' stroke-width='1.3'/%3E%3Ccircle cx='200' cy='215' r='12' stroke-width='1' stroke-dasharray='3 3'/%3E%3Cpath d='M244 200 C244 190 258 186 262 196 L262 218 C258 224 254 222 250 220 C246 218 244 220 244 218Z M253 196 A4 4 0 1 1 261 200' stroke-width='1.3'/%3E%3Crect x='286' y='204' width='34' height='26' rx='6' stroke-width='1.3'/%3E%3Cpath d='M294 215 L294 219 M291 217 L297 217 M308 215 L311 218 M308 218 L311 215' stroke-width='1.3'/%3E%3Ccircle cx='305' cy='210' r='3' stroke-width='1.3'/%3E%3Cpath d='M336 200 L354 200 L360 208 L360 228 L330 228 L330 208Z M338 214 L352 214 M338 220 L348 220' stroke-width='1.3'/%3E%3C!-- Row 6 --%3E%3Ccircle cx='20' cy='268' r='11' stroke-width='1.3'/%3E%3Ccircle cx='20' cy='260' r='3' fill='%23ffffff10' stroke-width='1'/%3E%3Cpath d='M12 278 Q20 284 28 278' stroke-width='1.3'/%3E%3Ccircle cx='16' cy='267' r='2' fill='%23ffffff10' stroke='none'/%3E%3Ccircle cx='24' cy='267' r='2' fill='%23ffffff10' stroke='none'/%3E%3Cpath d='M56 256 L76 256 L80 262 L80 280 L52 280 L52 262Z M60 268 L68 268 M60 273 L72 273' stroke-width='1.3'/%3E%3Cpath d='M106 256 L114 248 L122 256 L122 280 L106 280Z M112 280 L112 270 L116 270 L116 280' stroke-width='1.3'/%3E%3Crect x='146' y='256' width='30' height='24' rx='4' stroke-width='1.3'/%3E%3Ccircle cx='161' cy='266' r='5' stroke-width='1.3'/%3E%3Crect x='149' y='252' width='5' height='4' rx='1' stroke-width='1.3'/%3E%3Ccircle cx='195' cy='267' r='10' stroke-width='1.3'/%3E%3Ccircle cx='195' cy='267' r='5' stroke-width='1.3'/%3E%3Cpath d='M195 252 L195 258 M195 276 L195 282 M180 267 L186 267 M204 267 L210 267 M184 256 L188 260 M202 274 L206 278 M184 278 L188 274 M202 260 L206 256' stroke-width='1.2'/%3E%3Crect x='236' y='256' width='32' height='24' rx='4' stroke-width='1.3'/%3E%3Cpath d='M240 264 L260 264 M240 270 L255 270' stroke-width='1.3'/%3E%3Ccircle cx='260' cy='270' r='6' stroke-width='1.3'/%3E%3Cpath d='M258 270 L260 272 L264 268' stroke-width='1.3'/%3E%3Cpath d='M286 252 L306 252 C311 252 314 255 314 260 L314 278 C314 283 311 286 306 286 L286 286 C281 286 278 283 278 278 L278 260 C278 255 281 252 286 252Z' stroke-width='1.3'/%3E%3Cpath d='M284 268 Q292 276 300 268 Q308 260 300 252' stroke-width='1.3'/%3E%3Cpath d='M330 260 L348 252 L350 266 L338 282 L328 274Z M348 252 L356 255' stroke-width='1.3'/%3E%3Ccircle cx='346' cy='256' r='3' fill='%23ffffff10' stroke-width='1'/%3E%3C!-- Row 7 --%3E%3Ccircle cx='20' cy='318' r='10' stroke-width='1.3'/%3E%3Cpath d='M14 312 L12 304 L19 310 M26 312 L28 304 L21 310' stroke-width='1.3'/%3E%3Ccircle cx='17' cy='317' r='1.8' fill='%23ffffff10' stroke='none'/%3E%3Ccircle cx='23' cy='317' r='1.8' fill='%23ffffff10' stroke='none'/%3E%3Cpath d='M16 322 Q20 325 24 322' stroke-width='1.3'/%3E%3Ccircle cx='62' cy='318' r='11' stroke-width='1.3'/%3E%3Cpath d='M56 314 L62 308 L68 314 M56 322 L62 328 L68 322' stroke-width='1.3'/%3E%3Cpath d='M104 308 L124 308 L124 328 L104 328Z M108 316 L108 320 M112 316 L112 320 M116 316 L116 320 M120 316 L120 320' stroke-width='1.3'/%3E%3Ccircle cx='152' cy='318' r='11' stroke-width='1.3'/%3E%3Cpath d='M146 316 L152 322 L158 316' stroke-width='1.3'/%3E%3Cpath d='M195 308 C195 298 209 294 213 304 L213 322 C210 328 207 326 204 324 C201 322 195 326 195 322Z M204 304 A4 4 0 0 1 212 308' stroke-width='1.3'/%3E%3Crect x='234' y='308' width='32' height='24' rx='10' stroke-width='1.3'/%3E%3Cpath d='M242 318 L242 322 M239 320 L245 320 M256 318 L259 321 M256 321 L259 318' stroke-width='1.3'/%3E%3Cpath d='M284 306 L302 298 L304 312 L292 328 L282 320Z M302 298 L310 301 M300 307 L292 328' stroke-width='1.3'/%3E%3Ccircle cx='300' cy='302' r='3' fill='%23ffffff10' stroke-width='1'/%3E%3Cpath d='M328 306 L350 306 C354 306 356 308 356 312 L356 330 C356 334 354 336 350 336 L328 336 C324 336 322 334 322 330 L322 312 C322 308 324 306 328 306Z' stroke-width='1.3'/%3E%3Cpath d='M326 318 L356 318 M338 306 L338 336' stroke-width='1.3'/%3E%3C/g%3E%3C/svg%3E");
+  background-image:url('https://web.whatsapp.com/img/bg-chat-tile_9e8a2898faedb7db9bf5638405cf81ae.png');
+  background-repeat:repeat;
+  background-size:auto;
+  /* Dark overlay to darken the tile so it looks like dark mode */
+  position:relative;
 }
+/* Dark overlay on top of wallpaper */
+.wa-body::before{
+  content:'';
+  position:absolute;inset:0;
+  background:rgba(11,20,26,0.85);
+  pointer-events:none;
+  z-index:0;
+}
+.wa-body > *{position:relative;z-index:1;}
 .wa-body::-webkit-scrollbar{width:3px;}
 .wa-body::-webkit-scrollbar-thumb{background:#2a3942;border-radius:3px;}
 
-/* ── DATE SEPARATOR ── exactly like real WA: bold white text, no capsule */
-.date-sep{
-  text-align:center;
-  margin:10px 0 8px;
-  position:relative;
-}
+/* ── DATE SEPARATOR ── */
+.date-sep{text-align:center;margin:10px 0 7px;}
 .date-sep span{
-  display:inline-block;
-  background:#182229cc;
-  color:#e9edef;
-  font-size:12.5px;
-  font-weight:600;
-  padding:5px 14px;
-  border-radius:8px;
+  display:inline-block;background:#182229cc;color:#e9edef;
+  font-size:12.5px;font-weight:600;padding:5px 14px;border-radius:8px;
   box-shadow:0 1px 2px #0005;
 }
 
-/* ═══════════════════════════════════════════
-   BUBBLES — pixel-perfect
-═══════════════════════════════════════════ */
-.brow{
-  display:flex;
-  margin:1.5px 4px;
-  /* consecutive same-side = no margin increase */
-}
+/* ══════════════════════════
+   BUBBLE SYSTEM
+══════════════════════════ */
+.brow{display:flex;margin:1.5px 4px;}
 .brow.r{justify-content:flex-end;}
 .brow.l{justify-content:flex-start;}
 
-/* 
-  The WA bubble uses a clip-path or border-radius trick to create the tail.
-  We'll use a ::before pseudo on the wrapper for the tail shape.
-*/
-.bwrap{
-  position:relative;
-  max-width:75%;
-}
+.bwrap{position:relative;max-width:76%;}
 
-/* SENT bubble (right / green) */
-.brow.r .bwrap{
-  /* tail via box-shadow trick — right side */
-}
+/* ── TEXT BUBBLE ── */
 .bubble{
-  padding:7px 10px 6px 9px;
+  padding:7px 10px 5px 9px;
   word-break:break-word;
   position:relative;
   min-width:60px;
 }
 
-/* RIGHT bubble */
+/* RIGHT (sent) — green, tail bottom-right */
 .brow.r .bubble{
   background:#005c4b;
-  border-radius:12px 12px 4px 12px;
-  box-shadow: 4px 0 0 0 #005c4b, /* extends right to form tail */
-              0 1px 2px #0005;
+  border-radius:10px 10px 10px 10px;
+  box-shadow:0 1px 2px #0005;
 }
-/* LEFT bubble */
+/* tail only on FIRST (= last rendered, since tail tracks last in group) */
+.brow.r.has-tail .bubble{
+  border-bottom-right-radius:3px;
+}
+.brow.r.has-tail .bubble::after{
+  content:'';
+  position:absolute;
+  bottom:0;right:-7px;
+  width:10px;height:13px;
+  background:#005c4b;
+  clip-path:polygon(0 0,0 100%,100% 100%);
+}
+
+/* LEFT (received) — dark, tail bottom-left */
 .brow.l .bubble{
   background:#1e2d35;
-  border-radius:12px 12px 12px 4px;
-  box-shadow: -4px 0 0 0 #1e2d35,
-              0 1px 2px #0005;
+  border-radius:10px 10px 10px 10px;
+  box-shadow:0 1px 2px #0005;
 }
-
-/* Actual tail shape using a tiny positioned element */
-.brow.r .bubble::after{
+.brow.l.has-tail .bubble{
+  border-bottom-left-radius:3px;
+}
+.brow.l.has-tail .bubble::after{
   content:'';
   position:absolute;
-  bottom:0; right:-7px;
-  width:10px; height:13px;
-  background:#005c4b;
-  clip-path:polygon(0 0, 0 100%, 100% 100%);
-}
-.brow.l .bubble::after{
-  content:'';
-  position:absolute;
-  bottom:0; left:-7px;
-  width:10px; height:13px;
+  bottom:0;left:-7px;
+  width:10px;height:13px;
   background:#1e2d35;
-  clip-path:polygon(100% 0, 0 100%, 100% 100%);
+  clip-path:polygon(100% 0,0 100%,100% 100%);
 }
 
-/* No tail for consecutive same-side bubbles */
-.brow.r.no-tail .bubble{ border-radius:12px 12px 4px 12px; box-shadow:0 1px 2px #0005; }
-.brow.r.no-tail .bubble::after{ display:none; }
-.brow.l.no-tail .bubble{ border-radius:12px 12px 12px 4px; box-shadow:0 1px 2px #0005; }
-.brow.l.no-tail .bubble::after{ display:none; }
+/* margin: tighter between same-side, looser between sides */
+.brow.r + .brow.r,
+.brow.l + .brow.l{margin-top:1px;}
+.brow.r + .brow.l,
+.brow.l + .brow.r{margin-top:5px;}
 
-/* TEXT inside bubble */
-.btxt{
-  font-size:15px;
-  color:#e9edef;
-  line-height:1.45;
-  white-space:pre-wrap;
-  word-break:break-word;
-}
+/* TEXT */
+.btxt{font-size:15px;color:#e9edef;line-height:1.45;white-space:pre-wrap;word-break:break-word;}
 
-/*
-  FOOTER — hour + ticks
-  Floats to the right, sits on the same line as last text line
-  Uses the classic WA "inline-float" technique
-*/
+/* FOOTER — time+ticks inline float-right inside bubble */
 .bfoot{
-  display:inline-flex;
-  align-items:flex-end;
-  gap:3px;
-  float:right;
-  margin-left:6px;
-  margin-top:2px;
-  /* vertical alignment: nudge down slightly so it aligns with text baseline */
-  position:relative;
-  top:3px;
-  margin-bottom:-2px;
+  display:inline-flex;align-items:flex-end;gap:3px;
+  float:right;margin-left:6px;margin-top:2px;
+  position:relative;top:3px;margin-bottom:-1px;
 }
-.btime{
-  font-size:11px;
-  color:#8696a0;
-  white-space:nowrap;
-  line-height:1;
-}
-.brow.r .btime{ color:#9bb0aa; } /* slightly different in sent bubbles */
+.btime{font-size:11px;white-space:nowrap;line-height:1;}
+.brow.r .btime{color:#9bb0aa;}
+.brow.l .btime{color:#8696a0;}
 
-/* Ticks */
-.tick{ display:inline-flex; align-items:center; }
-.tick svg{ display:block; }
-.tick.blue svg{ fill:#53bdeb; }
-.tick.grey svg{ fill:#8696a0; }
-.tick.one  svg{ fill:#8696a0; }
+/* TICKS */
+.tick{display:inline-flex;align-items:center;}
+.tick svg{display:block;}
+.tick.blue svg{fill:#53bdeb;}
+.tick.grey svg{fill:#8696a0;}
+.tick.one  svg{fill:#8696a0;}
 
 /* ── PHOTO BUBBLE ── */
 .photo-bub{
-  max-width:260px;
-  border-radius:12px;
-  overflow:hidden;
-  position:relative;
-  box-shadow:0 1px 3px #0007;
+  max-width:250px;border-radius:10px;overflow:hidden;
+  position:relative;box-shadow:0 1px 3px #0007;
 }
-.brow.r .photo-bub{ border-bottom-right-radius:4px; }
-.brow.l .photo-bub{ border-bottom-left-radius:4px; }
-.brow.r .photo-bub::after{ /* same tail */
-  content:''; position:absolute; bottom:0; right:-7px;
-  width:10px; height:13px;
-  background:#005c4b; /* match photo overlay color */
-  clip-path:polygon(0 0, 0 100%, 100% 100%);
-  /* Actually hide for photos — use simple box-shadow approach */
-  display:none;
-}
-.photo-bub img{width:100%;display:block;max-height:300px;object-fit:cover;}
+.brow.r.has-tail .photo-bub{border-bottom-right-radius:3px;}
+.brow.l.has-tail .photo-bub{border-bottom-left-radius:3px;}
+.photo-bub img{width:100%;display:block;max-height:280px;object-fit:cover;}
 .photo-foot{
   position:absolute;bottom:0;right:0;left:0;
   padding:18px 8px 5px;
@@ -291,48 +202,34 @@ textarea{resize:vertical;min-height:50px;}
 
 /* ── VIEW-ONCE BUBBLE ── */
 .vo-bub{
-  min-width:210px;max-width:260px;
-  border-radius:12px;overflow:hidden;
+  min-width:200px;max-width:255px;border-radius:10px;overflow:hidden;
   box-shadow:0 1px 2px #0005;
-  position:relative;
 }
-.brow.r .vo-bub{background:#005c4b;border-bottom-right-radius:4px;}
-.brow.l .vo-bub{background:#1e2d35;border-bottom-left-radius:4px;}
-
-.vo-inner{display:flex;align-items:center;padding:10px 11px 7px;gap:11px;}
-.vo-cam{
-  width:48px;height:48px;border-radius:50%;
-  background:#00a884;
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;font-size:22px;
-}
+.brow.r .vo-bub{background:#005c4b;}
+.brow.l .vo-bub{background:#1e2d35;}
+.brow.r.has-tail .vo-bub{border-bottom-right-radius:3px;}
+.brow.l.has-tail .vo-bub{border-bottom-left-radius:3px;}
+.vo-inner{display:flex;align-items:center;padding:10px 11px 7px;gap:10px;}
+.vo-cam{width:46px;height:46px;border-radius:50%;background:#00a884;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:22px;}
 .brow.r .vo-cam{background:#007762;}
-.vo-spin-wrap{width:48px;height:48px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.vo-spin{width:46px;height:46px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .vo-texts{flex:1;}
 .vo-lnew{font-size:15px;font-weight:500;color:#e9edef;}
 .vo-sub{font-size:12px;color:#8696a0;margin-top:2px;}
-/* "Abierto" — italic grey exactly like your screenshot */
-.vo-lopened{font-size:15px;font-style:italic;font-weight:400;color:#8696a0;}
+.vo-lopen{font-size:15px;font-style:italic;font-weight:400;color:#8696a0;}
 .vo-foot{display:flex;justify-content:flex-end;align-items:center;gap:3px;padding:0 11px 8px;}
 
-/* ── INPUT BAR — iPhone style ── */
+/* ── INPUT BAR — iPhone style from your screenshot ── */
 .wa-input{
-  background:#202c33;
-  padding:8px 10px;
-  display:flex;align-items:center;gap:9px;
-  flex-shrink:0;
+  background:#202c33;padding:7px 10px;
+  display:flex;align-items:center;gap:9px;flex-shrink:0;
 }
-.wa-pill{
-  flex:1;background:#2a3942;border-radius:24px;
-  padding:9px 14px;display:flex;align-items:center;gap:10px;
-}
+.wa-pill{flex:1;background:#2a3942;border-radius:24px;padding:9px 14px;display:flex;align-items:center;gap:10px;}
 .wa-ph{flex:1;color:#8696a0;font-size:15px;}
-.wa-mic{
-  width:46px;height:46px;border-radius:50%;
-  background:#00a884;
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;font-size:22px;
-}
+/* iPhone style: paperclip/sticker | camera | mic outside */
+.wa-sticker{font-size:20px;opacity:.7;}
+.wa-cam-ic{font-size:19px;opacity:.7;}
+.wa-mic{width:46px;height:46px;border-radius:50%;background:#00a884;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px;}
 
 /* modal */
 .modal-bg{display:none;position:fixed;inset:0;background:#0009;z-index:200;align-items:center;justify-content:center;}
@@ -351,14 +248,14 @@ textarea{resize:vertical;min-height:50px;}
 </head>
 <body>
 
-<!-- ═══════════ PANEL ═══════════ -->
+<!-- ════════════ PANEL ════════════ -->
 <div id="panel">
   <div class="p-hd">⚙️ WhatsApp Fake Chat</div>
 
   <div class="sec">
     <div class="lbl">Contacto</div>
     <div class="crow">
-      <img id="avPrev" src="https://ui-avatars.com/api/?name=J&background=128C7E&color=fff&size=48" title="Clic para cambiar">
+      <img id="avPrev" src="https://ui-avatars.com/api/?name=J&background=128C7E&color=fff&size=48" title="Clic para cambiar foto">
       <input type="file" id="avFile" accept="image/*" style="display:none">
       <div style="flex:1;display:flex;flex-direction:column;gap:6px">
         <input type="text" id="cName" value="Joffre Quinteros Sr..." placeholder="Nombre" oninput="syncHdr()">
@@ -376,7 +273,7 @@ textarea{resize:vertical;min-height:50px;}
   </div>
 
   <div class="sec">
-    <div class="lbl">Tipo</div>
+    <div class="lbl">Tipo de mensaje</div>
     <div class="pills">
       <div class="pill on" id="tTxt" onclick="setType('text')">✏️ Texto</div>
       <div class="pill"    id="tImg" onclick="setType('photo')">📷 Foto</div>
@@ -386,7 +283,7 @@ textarea{resize:vertical;min-height:50px;}
 
   <div class="sec" id="secTxt">
     <div class="lbl">Mensaje</div>
-    <textarea id="msgTxt" placeholder="Escribe aquí...&#10;Ctrl+Enter = agregar"></textarea>
+    <textarea id="msgTxt" placeholder="Escribe aquí... (Ctrl+Enter para agregar)"></textarea>
     <div class="ewrap" id="erow"></div>
   </div>
 
@@ -408,7 +305,7 @@ textarea{resize:vertical;min-height:50px;}
   <div class="sec">
     <div class="lbl">Hora</div>
     <input type="time" id="mTime" value="15:07" style="margin-bottom:8px">
-    <div class="lbl">Palomitas (solo mensajes enviados)</div>
+    <div class="lbl">Palomitas</div>
     <div class="pills" id="tPills">
       <div class="pill on" id="tk2b" onclick="setTick('read')">✓✓ Azul</div>
       <div class="pill"    id="tk2g" onclick="setTick('sent')">✓✓ Gris</div>
@@ -419,41 +316,56 @@ textarea{resize:vertical;min-height:50px;}
   <div class="sec">
     <button id="btnAdd" onclick="addMsg()">➕ Agregar mensaje</button>
   </div>
-
   <div class="arow">
     <button id="btnClear" onclick="clearAll()">🗑 Limpiar</button>
     <button id="btnSave"  onclick="document.getElementById('modal').classList.add('open')">📸 Capturar</button>
   </div>
 </div>
 
-<!-- ═══════════ PREVIEW ═══════════ -->
+<!-- ════════════ PREVIEW ════════════ -->
 <div id="preview">
   <div class="wa-screen">
 
+    <!-- HEADER — fiel: ‹ 25 [avatar verde ring] Nombre | 📹 📞 ⋮ -->
     <div class="wa-hdr">
-      <span class="wa-back">‹</span>
-      <img id="hdrAv" src="https://ui-avatars.com/api/?name=J&background=128C7E&color=fff&size=40">
+      <span class="hdr-back">‹</span>
+      <span class="hdr-count" id="hdrCount">25</span>
+      <div class="hdr-av-wrap">
+        <img id="hdrAv" src="https://ui-avatars.com/api/?name=J&background=128C7E&color=fff&size=40">
+      </div>
       <div class="hdr-txt">
         <div class="hdr-name" id="hdrName">Joffre Quinteros Sr...</div>
         <div class="hdr-sub"  id="hdrSub">en línea</div>
       </div>
       <div class="hdr-ics">
-        <svg viewBox="0 0 24 24"><path d="M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 4v-11l-4 4z"/></svg>
-        <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.45 2.33.7 3.58.7a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.58a1 1 0 0 1-.25 1.01l-2.2 2.2z"/></svg>
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
+        <!-- Camera/video icon — square with play triangle like screenshot -->
+        <svg viewBox="0 0 24 24">
+          <rect x="2" y="6" width="15" height="12" rx="2"/>
+          <path d="M17 9.5 L22 6.5 L22 17.5 L17 14.5 Z"/>
+        </svg>
+        <!-- Phone icon -->
+        <svg viewBox="0 0 24 24">
+          <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.45 2.33.7 3.58.7a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.58a1 1 0 0 1-.25 1.01l-2.2 2.2z"/>
+        </svg>
+        <!-- Three dots -->
+        <svg viewBox="0 0 24 24">
+          <circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/>
+        </svg>
       </div>
     </div>
 
+    <!-- BODY -->
     <div class="wa-body" id="chatBody">
       <div class="date-sep"><span>Hoy</span></div>
     </div>
 
+    <!-- INPUT BAR — iPhone style from screenshot: emoji | pill(sticker cam) | mic -->
     <div class="wa-input">
       <div class="wa-pill">
         <span style="font-size:22px">😊</span>
         <div class="wa-ph">Mensaje</div>
-        <span style="font-size:19px">📎</span>
-        <span style="font-size:19px">📷</span>
+        <span class="wa-sticker">🪣</span>
+        <span class="wa-cam-ic">📷</span>
       </div>
       <div class="wa-mic">🎤</div>
     </div>
@@ -464,7 +376,9 @@ textarea{resize:vertical;min-height:50px;}
 <div class="modal-bg" id="modal">
   <div class="modal">
     <h3>📸 Cómo capturar</h3>
-    <p>• Windows: <b>Win + Shift + S</b><br>• Mac: <b>Cmd + Shift + 4</b><br>• Chrome: F12 → selecciona .wa-screen → clic derecho → "Capture node screenshot"</p>
+    <p>• Windows: <b>Win + Shift + S</b> y selecciona el chat<br>
+    • Mac: <b>Cmd + Shift + 4</b><br>
+    • Chrome: F12 → click derecho en <code>.wa-screen</code> → "Capture node screenshot"</p>
     <button onclick="document.getElementById('modal').classList.remove('open')">Cerrar</button>
   </div>
 </div>
@@ -490,7 +404,10 @@ function syncHdr(){
 }
 
 // STATE
-let sender='r',mType='text',voSt='new',tick='read',pSrc=null,lastSide='';
+let sender='r',mType='text',voSt='new',tick='read',pSrc=null;
+
+// Track last side PER TYPE to handle tail correctly
+let lastSide='';
 
 function setSender(s){
   sender=s;
@@ -506,15 +423,8 @@ function setType(t){
   document.getElementById('secImg').style.display=t==='photo'?'':'none';
   document.getElementById('secVO').style.display=t==='vo'?'':'none';
 }
-function setVO(s){
-  voSt=s;
-  document.getElementById('voN').classList.toggle('on',s==='new');
-  document.getElementById('voO').classList.toggle('on',s==='opened');
-}
-function setTick(m){
-  tick=m;
-  ['read','sent','one'].forEach(x=>document.getElementById({read:'tk2b',sent:'tk2g',one:'tk1'}[x]).classList.toggle('on',x===m));
-}
+function setVO(s){voSt=s;document.getElementById('voN').classList.toggle('on',s==='new');document.getElementById('voO').classList.toggle('on',s==='opened');}
+function setTick(m){tick=m;['read','sent','one'].forEach(x=>document.getElementById({read:'tk2b',sent:'tk2g',one:'tk1'}[x]).classList.toggle('on',x===m));}
 
 // PHOTO
 document.getElementById('iFile').onchange=e=>{
@@ -535,98 +445,92 @@ function fmt(v){
   return`${h}:${mm} ${ap}`;
 }
 
-// TICK SVG — exact WhatsApp checkmark paths
+// TICK SVG — WhatsApp exact double-check shape
 function mkTick(m){
-  // Double tick — two overlapping checks, exact WA shape
-  const dbl=`<svg width="18" height="11" viewBox="0 0 18 11" xmlns="http://www.w3.org/2000/svg">
-    <path d="M17.394.603a.748.748 0 0 0-1.07.108L8.3 10.274 4.13 6.155a.75.75 0 0 0-1.06 1.06l4.77 4.77a.748.748 0 0 0 1.101-.058l8.562-10.21a.748.748 0 0 0-.109-1.114z" opacity=".5"/>
-    <path d="M12.896.603a.748.748 0 0 0-1.07.108L3.8 10.274.13 6.655a.75.75 0 0 0-1.06 1.06l4.27 4.27a.748.748 0 0 0 1.1-.058L12.003 1.717a.748.748 0 0 0-.107-1.114z"/>
+  const dbl=`<svg width="18" height="11" viewBox="0 0 18 11">
+    <path d="M17.394.603a.748.748 0 0 0-1.07.108L8.3 10.274 4.13 6.155a.75.75 0 0 0-1.06 1.06l4.77 4.77a.748.748 0 0 0 1.101-.058l8.562-10.21a.748.748 0 0 0-.109-1.114z" opacity=".55"/>
+    <path d="M12.896.603a.748.748 0 0 0-1.07.108L3.8 10.274.13 6.655a.75.75 0 1 0-1.06 1.06l4.27 4.27a.748.748 0 0 0 1.1-.058L12.003 1.717a.748.748 0 0 0-.107-1.114z"/>
   </svg>`;
-  // Single tick
-  const sgl=`<svg width="13" height="11" viewBox="0 0 13 11" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12.396.603a.748.748 0 0 0-1.07.108L3.8 10.274.13 6.655a.75.75 0 0 0-1.06 1.06l4.27 4.27a.748.748 0 0 0 1.1-.058L12.003 1.717a.748.748 0 0 0-.107-1.114z"/>
+  const sgl=`<svg width="13" height="11" viewBox="0 0 13 11">
+    <path d="M12.396.603a.748.748 0 0 0-1.07.108L3.8 10.274.13 6.655a.75.75 0 1 0-1.06 1.06l4.27 4.27a.748.748 0 0 0 1.1-.058L12.003 1.717a.748.748 0 0 0-.107-1.114z"/>
   </svg>`;
   if(m==='one') return`<span class="tick one">${sgl}</span>`;
   if(m==='read')return`<span class="tick blue">${dbl}</span>`;
   return`<span class="tick grey">${dbl}</span>`;
 }
 
-// VIEW-ONCE SPINNER — matches your screenshot: two partial concentric arcs
+// VIEW-ONCE SPINNER
 function voSpinner(){
-  return`<svg width="42" height="42" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="21" cy="21" r="18" fill="none" stroke="#4a5568" stroke-width="2.8"
-      stroke-dasharray="82 31" stroke-linecap="round" transform="rotate(-105 21 21)"/>
-    <circle cx="21" cy="21" r="11" fill="none" stroke="#4a5568" stroke-width="2.8"
-      stroke-dasharray="48 21" stroke-linecap="round" transform="rotate(-75 21 21)"/>
+  return`<svg width="42" height="42" viewBox="0 0 42 42">
+    <circle cx="21" cy="21" r="17" fill="none" stroke="#4a5568" stroke-width="2.8"
+      stroke-dasharray="80 27" stroke-linecap="round" transform="rotate(-100 21 21)"/>
+    <circle cx="21" cy="21" r="10" fill="none" stroke="#4a5568" stroke-width="2.8"
+      stroke-dasharray="46 17" stroke-linecap="round" transform="rotate(-75 21 21)"/>
   </svg>`;
 }
 
-// ADD MESSAGE
+// ══ KEY LOGIC: tail goes on the LAST bubble of each consecutive group ══
+// We do this by removing has-tail from the previous same-side bubble
+// and adding it to the new one.
+let lastBrow = null; // track the actual DOM element
+
 function addMsg(){
   const body=document.getElementById('chatBody');
   const time=fmt(document.getElementById('mTime').value);
   const s=sender;
-  const isSameSide=lastSide===s;
   const hasTick=s==='r';
+  const isSame=(lastSide===s && lastBrow!==null);
+
+  // If same side as previous, REMOVE has-tail from previous
+  if(isSame && lastBrow){
+    lastBrow.classList.remove('has-tail');
+    // Also remove ::after residual by resetting border-radius if needed
+  }
 
   let html='';
-  const noTail=isSameSide?'no-tail':'';
 
   if(mType==='text'){
     const txt=document.getElementById('msgTxt').value.trim();
     if(!txt){alert('Escribe un mensaje');return;}
     const ticks=hasTick?mkTick(tick):'';
     const foot=`<div class="bfoot"><span class="btime">${time}</span>${ticks}</div>`;
-    html=`<div class="brow ${s} ${noTail}">
-      <div class="bwrap">
-        <div class="bubble"><span class="btxt">${esc(txt)}</span>${foot}</div>
-      </div>
-    </div>`;
+    html=`<div class="brow ${s} has-tail"><div class="bwrap"><div class="bubble"><span class="btxt">${esc(txt)}</span>${foot}</div></div></div>`;
 
   } else if(mType==='photo'){
     if(!pSrc){alert('Selecciona una foto');return;}
     const ticks=hasTick?mkTick(tick):'';
     const foot=`<div class="photo-foot"><span class="btime">${time}</span>${ticks}</div>`;
-    html=`<div class="brow ${s} ${noTail}">
-      <div class="bwrap">
-        <div class="photo-bub"><img src="${pSrc}">${foot}</div>
-      </div>
-    </div>`;
+    html=`<div class="brow ${s} has-tail"><div class="bwrap"><div class="photo-bub"><img src="${pSrc}">${foot}</div></div></div>`;
 
   } else if(mType==='vo'){
     const ticks=hasTick?mkTick(tick):'';
     const foot=`<div class="vo-foot"><span class="btime">${time}</span>${ticks}</div>`;
     let inner='';
     if(voSt==='new'){
-      inner=`<div class="vo-inner">
-        <div class="vo-cam">📷</div>
-        <div class="vo-texts">
-          <div class="vo-lnew">Foto</div>
-          <div class="vo-sub">Solo se puede ver una vez</div>
-        </div>
-      </div>`;
+      inner=`<div class="vo-inner"><div class="vo-cam">📷</div><div class="vo-texts"><div class="vo-lnew">Foto</div><div class="vo-sub">Solo se puede ver una vez</div></div></div>`;
     } else {
-      inner=`<div class="vo-inner">
-        <div class="vo-spin-wrap">${voSpinner()}</div>
-        <div class="vo-texts">
-          <div class="vo-lopened">Abierto</div>
-        </div>
-      </div>`;
+      inner=`<div class="vo-inner"><div class="vo-spin">${voSpinner()}</div><div class="vo-texts"><div class="vo-lopen">Abierto</div></div></div>`;
     }
-    html=`<div class="brow ${s} ${noTail}">
-      <div class="bwrap">
-        <div class="vo-bub">${inner}${foot}</div>
-      </div>
-    </div>`;
+    html=`<div class="brow ${s} has-tail"><div class="bwrap"><div class="vo-bub">${inner}${foot}</div></div></div>`;
   }
 
   body.insertAdjacentHTML('beforeend',html);
-  body.scrollTop=body.scrollHeight;
+
+  // Track this new element as lastBrow
+  const newBrow=body.lastElementChild;
+  lastBrow=newBrow;
   lastSide=s;
+
+  body.scrollTop=body.scrollHeight;
 }
 
 function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');}
-function clearAll(){if(!confirm('¿Borrar todo?'))return;document.getElementById('chatBody').innerHTML='<div class="date-sep"><span>Hoy</span></div>';lastSide='';}
+
+function clearAll(){
+  if(!confirm('¿Borrar todo?'))return;
+  document.getElementById('chatBody').innerHTML='<div class="date-sep"><span>Hoy</span></div>';
+  lastSide='';lastBrow=null;
+}
 
 document.getElementById('msgTxt').addEventListener('keydown',e=>{if(e.key==='Enter'&&e.ctrlKey)addMsg();});
 </script>
