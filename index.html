@@ -5,349 +5,302 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WhatsApp Fake Chat</title>
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
+*{margin:0;padding:0;box-sizing:border-box;}
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
-  background: #111b21;
-  display: flex;
-  height: 100vh;
-  overflow: hidden;
-  color: #fff;
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Helvetica,sans-serif;
+  background:#111b21;
+  display:flex;
+  height:100vh;
+  overflow:hidden;
+  color:#fff;
 }
 
-/* ══ PANEL EDITOR ══ */
-#panel {
-  width: 360px;
-  min-width: 300px;
-  background: #202c33;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  border-right: 1px solid #2a3942;
-  z-index: 10;
+/* ══ PANEL ══ */
+#panel{
+  width:340px;min-width:280px;
+  background:#202c33;
+  display:flex;flex-direction:column;
+  overflow-y:auto;
+  border-right:1px solid #2a3942;
+  flex-shrink:0;
 }
-#panel::-webkit-scrollbar { width: 4px; }
-#panel::-webkit-scrollbar-thumb { background: #2a3942; border-radius: 4px; }
+#panel::-webkit-scrollbar{width:4px;}
+#panel::-webkit-scrollbar-thumb{background:#2a3942;border-radius:4px;}
 
-#panel h2 {
-  padding: 16px 16px 10px;
-  font-size: 13px;
-  font-weight: 700;
-  color: #8696a0;
-  text-transform: uppercase;
-  letter-spacing: .8px;
-  border-bottom: 1px solid #2a3942;
-  background: #182229;
+.p-title{
+  padding:13px 14px 10px;
+  font-size:12px;font-weight:700;color:#8696a0;
+  text-transform:uppercase;letter-spacing:.8px;
+  border-bottom:1px solid #2a3942;background:#182229;
+  flex-shrink:0;
 }
 
-.sec {
-  padding: 12px 14px;
-  border-bottom: 1px solid #2a3942;
-}
-.sec > label {
-  display: block;
-  font-size: 11px;
-  color: #8696a0;
-  font-weight: 600;
-  margin-bottom: 7px;
-  letter-spacing: .5px;
-  text-transform: uppercase;
-}
+.sec{padding:11px 13px;border-bottom:1px solid #2a3942;}
+.lbl{font-size:11px;color:#8696a0;font-weight:600;margin-bottom:7px;letter-spacing:.5px;text-transform:uppercase;}
 
-input[type=text], input[type=time], select, textarea {
-  width: 100%;
-  background: #2a3942;
-  border: 1px solid #3b4a54;
-  border-radius: 8px;
-  color: #e9edef;
-  font-size: 14px;
-  padding: 8px 11px;
-  outline: none;
-  font-family: inherit;
-  transition: border-color .15s;
+input[type=text],input[type=time],textarea,select{
+  width:100%;background:#2a3942;border:1px solid #3b4a54;
+  border-radius:8px;color:#e9edef;font-size:14px;
+  padding:8px 11px;outline:none;font-family:inherit;transition:border-color .15s;
 }
-input:focus, textarea:focus, select:focus { border-color: #00a884; }
-textarea { resize: vertical; min-height: 55px; }
+input:focus,textarea:focus{border-color:#00a884;}
+textarea{resize:vertical;min-height:52px;}
 
-.contact-row { display:flex; gap:12px; align-items:center; }
-#avatarPreview {
-  width: 52px; height: 52px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #00a884;
-  cursor: pointer;
-  flex-shrink: 0;
+.contact-row{display:flex;gap:11px;align-items:center;}
+#avatarPreview{
+  width:50px;height:50px;border-radius:50%;
+  object-fit:cover;border:2px solid #00a884;
+  cursor:pointer;flex-shrink:0;
 }
 
-.pill-row { display:flex; gap:6px; margin-top:0; }
-.pill {
-  flex:1; text-align:center; padding:7px 4px;
-  border-radius: 8px; border: 1px solid #3b4a54;
-  cursor: pointer; font-size: 12px; color: #8696a0;
-  transition: all .15s; user-select:none;
+.pills{display:flex;gap:5px;}
+.pill{
+  flex:1;text-align:center;padding:7px 4px;
+  border-radius:8px;border:1px solid #3b4a54;
+  cursor:pointer;font-size:12px;color:#8696a0;
+  transition:all .15s;user-select:none;
 }
-.pill.on { background:#00a884; border-color:#00a884; color:#fff; font-weight:700; }
+.pill.on{background:#00a884;border-color:#00a884;color:#fff;font-weight:700;}
 
-.check-row { display:flex; align-items:center; gap:8px; margin-top:8px; }
-.check-row input[type=checkbox] { accent-color:#00a884; width:15px; height:15px; cursor:pointer; }
-.check-row label { font-size:13px; color:#d1d7db; cursor:pointer; margin:0; }
+.emoji-wrap{display:flex;flex-wrap:wrap;gap:3px;margin-top:8px;}
+.emoji-wrap span{font-size:19px;cursor:pointer;padding:2px 3px;border-radius:5px;}
+.emoji-wrap span:hover{background:#2a3942;}
 
-.emoji-wrap { display:flex; flex-wrap:wrap; gap:3px; margin-top:8px; }
-.emoji-wrap span { font-size:19px; cursor:pointer; padding:2px 3px; border-radius:5px; }
-.emoji-wrap span:hover { background:#2a3942; }
-
-#photoFileBtn {
-  width:100%; padding:9px; border-radius:8px;
-  border: 1.5px dashed #3b4a54; background:transparent;
-  color:#8696a0; font-size:13px; cursor:pointer; transition:.15s;
+.file-btn{
+  width:100%;padding:9px;border-radius:8px;
+  border:1.5px dashed #3b4a54;background:transparent;
+  color:#8696a0;font-size:13px;cursor:pointer;transition:.15s;
+  font-family:inherit;
 }
-#photoFileBtn:hover { border-color:#00a884; color:#00a884; }
+.file-btn:hover{border-color:#00a884;color:#00a884;}
 
-#btnAdd {
-  width:100%; padding:10px; border-radius:8px; border:none;
-  background:#00a884; color:#fff; font-size:14px; font-weight:700;
-  cursor:pointer; transition:.15s;
+#btnAdd{
+  width:100%;padding:10px;border-radius:8px;border:none;
+  background:#00a884;color:#fff;font-size:14px;font-weight:700;
+  cursor:pointer;font-family:inherit;
 }
-#btnAdd:hover { background:#017a62; }
+#btnAdd:hover{background:#017a62;}
 
-.act-row { display:flex; gap:8px; padding:12px 14px; }
-.act-row button {
-  flex:1; padding:9px; border-radius:8px; border:none;
-  font-size:13px; font-weight:600; cursor:pointer; transition:.15s;
+.act-row{display:flex;gap:7px;padding:11px 13px;}
+.act-row button{
+  flex:1;padding:9px;border-radius:8px;border:none;
+  font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;
 }
-#btnClear { background:#2a3942; color:#ef4444; }
-#btnClear:hover { background:#3b4a54; }
-#btnSave { background:#1d4ed8; color:#fff; }
-#btnSave:hover { background:#1e40af; }
+#btnClear{background:#2a3942;color:#ef4444;}
+#btnSave{background:#1d4ed8;color:#fff;}
 
 /* ══ PREVIEW ══ */
-#preview {
-  flex:1;
-  display:flex;
-  align-items:stretch;
-  justify-content:center;
+#preview{
+  flex:1;display:flex;align-items:stretch;justify-content:center;
   overflow:hidden;
-  background: #0b141a;
 }
 
-/* The actual WA phone screen fills the preview */
-.wa-screen {
-  width: 100%;
-  max-width: 480px;
-  display: flex;
-  flex-direction: column;
-  background: #0b141a;
-  position: relative;
+.wa-screen{
+  width:100%;max-width:500px;
+  display:flex;flex-direction:column;
+  /* Real WA dark wallpaper pattern */
+  background-color:#0b141a;
 }
 
-/* ── WA Header ── */
-.wa-hdr {
-  background: #202c33;
-  display: flex;
-  align-items: center;
-  padding: 10px 10px 10px 4px;
-  gap: 6px;
-  flex-shrink: 0;
-  border-bottom: 1px solid #2a3942;
+/* ── WA HEADER ── */
+.wa-hdr{
+  background:#202c33;
+  display:flex;align-items:center;
+  padding:10px 10px 10px 6px;gap:8px;
+  flex-shrink:0;
 }
-.wa-back {
-  font-size: 24px; color: #aebac1;
-  padding: 0 4px; cursor: pointer; flex-shrink:0;
-}
-#hdrAvatar {
-  width: 40px; height: 40px;
-  border-radius: 50%; object-fit:cover; flex-shrink:0;
-}
-.wa-hdr-info { flex:1; min-width:0; }
-.wa-hdr-name { font-size: 16px; font-weight: 600; color: #e9edef; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.wa-hdr-status { font-size: 13px; color: #00a884; }
-.wa-hdr-icons { display:flex; gap:18px; padding-right:6px; }
-.wa-hdr-icons svg { width:22px; height:22px; fill:#aebac1; }
+.wa-back{font-size:26px;color:#aebac1;flex-shrink:0;line-height:1;}
+#hdrAvatar{width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+.hdr-info{flex:1;min-width:0;}
+.hdr-name{font-size:16px;font-weight:600;color:#e9edef;line-height:1.2;}
+.hdr-sub{font-size:13px;color:#00a884;margin-top:1px;}
+.hdr-icons{display:flex;gap:20px;padding-right:4px;align-items:center;}
+.hdr-icons svg{width:23px;height:23px;fill:#aebac1;}
 
-/* ── Chat body ── */
-.wa-body {
-  flex:1;
-  overflow-y: auto;
-  padding: 8px 6px 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  /* WA dark wallpaper */
-  background-color: #0b141a;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Crect width='80' height='80' fill='%230b141a'/%3E%3Cpath d='M0 40 Q20 20 40 40 Q60 60 80 40' stroke='%23ffffff05' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+/* ── CHAT BODY ── */
+.wa-body{
+  flex:1;overflow-y:auto;
+  padding:10px 8px 12px;
+  display:flex;flex-direction:column;gap:2px;
+  /* WA official dark wallpaper — doodle pattern SVG */
+  background-color:#0b141a;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect width='200' height='200' fill='%230b141a'/%3E%3Cg fill='none' stroke='%23ffffff0d' stroke-width='1.2' stroke-linecap='round'%3E%3C!-- heart --%3E%3Cpath d='M30 40 C30 35 23 32 20 37 C17 32 10 35 10 40 C10 48 20 55 20 55 C20 55 30 48 30 40Z'/%3E%3C!-- star --%3E%3Cpolygon points='80,10 82,17 90,17 84,22 86,29 80,25 74,29 76,22 70,17 78,17' /%3E%3C!-- music note --%3E%3Cpath d='M110 25 L110 40 M110 25 L120 22 L120 37 M110 40 a3 3 0 1 0 6 0 a3 3 0 1 0-6 0 M120 37 a3 3 0 1 0 6 0 a3 3 0 1 0-6 0'/%3E%3C!-- camera --%3E%3Crect x='140' y='20' width='24' height='18' rx='3'/%3E%3Ccircle cx='152' cy='29' r='5'/%3E%3Crect x='143' y='16' width='6' height='4' rx='1'/%3E%3C!-- smile --%3E%3Ccircle cx='175' cy='30' r='10'/%3E%3Ccircle cx='172' cy='28' r='1.5' fill='%23ffffff0d'/%3E%3Ccircle cx='178' cy='28' r='1.5' fill='%23ffffff0d'/%3E%3Cpath d='M171 33 Q175 37 179 33'/%3E%3C!-- lightning --%3E%3Cpath d='M15 80 L10 92 L16 92 L11 105 L22 88 L16 88 L21 80Z'/%3E%3C!-- diamond --%3E%3Cpolygon points='50,75 60,82 50,95 40,82'/%3E%3C!-- flower --%3E%3Ccircle cx='100' cy='85' r='4'/%3E%3Ccircle cx='100' cy='77' r='3'/%3E%3Ccircle cx='108' cy='85' r='3'/%3E%3Ccircle cx='100' cy='93' r='3'/%3E%3Ccircle cx='92' cy='85' r='3'/%3E%3C!-- gamepad --%3E%3Crect x='130' y='78' width='28' height='20' rx='6'/%3E%3Cpath d='M136 85 L136 91 M133 88 L139 88'/%3E%3Ccircle cx='152' cy='86' r='2'/%3E%3Ccircle cx='156' cy='90' r='2'/%3E%3C!-- rocket --%3E%3Cpath d='M180 75 C180 65 188 60 188 75 L188 88 C185 92 183 92 180 88 Z'/%3E%3Ccircle cx='184' cy='73' r='3'/%3E%3Cpath d='M178 85 L175 90 M190 85 L193 90'/%3E%3C!-- house --%3E%3Cpath d='M10 155 L20 145 L30 155 L30 170 L10 170Z'/%3E%3Cpath d='M16 170 L16 162 L24 162 L24 170'/%3E%3C!-- leaf --%3E%3Cpath d='M55 140 C55 125 70 120 75 130 C70 145 55 155 50 150 C50 150 55 140 55 140Z'/%3E%3C!-- cat --%3E%3Ccircle cx='110' cy='150' r='12'/%3E%3Cpath d='M102 140 L100 132 L107 138'/%3E%3Cpath d='M118 140 L120 132 L113 138'/%3E%3Ccircle cx='106' cy='148' r='2' fill='%23ffffff0d'/%3E%3Ccircle cx='114' cy='148' r='2' fill='%23ffffff0d'/%3E%3Cpath d='M108 154 L110 157 L112 154'/%3E%3C!-- sun --%3E%3Ccircle cx='160' cy='150' r='8'/%3E%3Cpath d='M160 138 L160 135 M160 162 L160 165 M148 150 L145 150 M172 150 L175 150 M152 142 L150 140 M170 158 L168 160 M152 158 L150 160 M170 142 L168 140'/%3E%3C%2Fg%3E%3C/svg%3E");
 }
-.wa-body::-webkit-scrollbar { width: 4px; }
-.wa-body::-webkit-scrollbar-thumb { background:#2a3942; border-radius:4px; }
+.wa-body::-webkit-scrollbar{width:3px;}
+.wa-body::-webkit-scrollbar-thumb{background:#2a3942;border-radius:4px;}
 
-/* date chip */
-.date-chip {
-  text-align:center; margin: 8px 0 6px;
-}
-.date-chip span {
-  background: #182229;
-  color: #8696a0;
-  font-size: 12px;
-  padding: 4px 12px;
-  border-radius: 7px;
-  box-shadow: 0 1px 2px #0005;
+/* ── DATE CHIP ── exactly like WA: subtle pill */
+.date-chip{text-align:center;margin:6px 0 8px;}
+.date-chip span{
+  display:inline-block;
+  background:#182229cc;
+  color:#8696a0;
+  font-size:12.5px;
+  font-weight:400;
+  padding:5px 14px;
+  border-radius:8px;
+  box-shadow:0 1px 2px #0005;
 }
 
-/* ── Bubbles ── */
-.bwrap { display:flex; margin: 1px 2px; }
-.bwrap.r { justify-content:flex-end; }
-.bwrap.l { justify-content:flex-start; }
+/* ── BUBBLES ── */
+.bwrap{display:flex;align-items:flex-end;margin:1px 0;}
+.bwrap.r{justify-content:flex-end;}
+.bwrap.l{justify-content:flex-start;}
 
-/* tail shapes */
-.bwrap.r .bubble { border-bottom-right-radius: 3px; }
-.bwrap.l .bubble { border-bottom-left-radius: 3px; }
-
-.bubble {
-  max-width: 75%;
-  padding: 6px 9px 5px;
-  border-radius: 7.5px;
-  position: relative;
-  word-break: break-word;
-  box-shadow: 0 1px 2px #0004;
+/* The tail — a tiny SVG triangle attached to bubble corner */
+.tail-r,.tail-l{
+  width:8px;height:13px;flex-shrink:0;
+  margin-bottom:0;align-self:flex-end;
 }
-.bwrap.r .bubble { background: #005c4b; }
-.bwrap.l .bubble { background: #202c33; }
+.tail-r svg{fill:#005c4b;display:block;}
+.tail-l svg{fill:#1f2c34;display:block;transform:scaleX(-1);}
 
-/* tail SVG for right */
-.bwrap.r .tail {
-  width:8px; height:13px; flex-shrink:0; align-self:flex-end;
+/* Main bubble */
+.bubble{
+  max-width:73%;
+  padding:7px 10px 5px 10px;
+  word-break:break-word;
+  position:relative;
+  box-shadow:0 1px 2px #0005;
 }
-.bwrap.r .tail svg { fill: #005c4b; }
-.bwrap.l .tail {
-  width:8px; height:13px; flex-shrink:0; align-self:flex-end;
-  transform: scaleX(-1);
+/* RIGHT = sent (green) */
+.bwrap.r .bubble{
+  background:#005c4b;
+  border-radius:10px 10px 0px 10px;
 }
-.bwrap.l .tail svg { fill: #202c33; }
-
-.bubble-txt {
-  font-size: 14.5px;
-  color: #e9edef;
-  line-height: 1.45;
-  white-space: pre-wrap;
+/* LEFT = received (dark grey-blue) */
+.bwrap.l .bubble{
+  background:#1f2c34;
+  border-radius:10px 10px 10px 0px;
 }
 
-.bubble-footer {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 3px;
-  margin-top: 1px;
-  float: right;
-  margin-left: 8px;
-  position: relative;
-  bottom: 0;
-}
-.btime { font-size: 11px; color: #8696a0; }
-/* ticks */
-.ticks { display:inline-flex; align-items:center; }
-.ticks svg { width:16px; height:11px; }
-.ticks.blue svg { fill:#53bdeb; }
-.ticks.grey svg { fill:#8696a0; }
-.ticks.one svg { fill:#8696a0; }
-
-/* ── Photo bubble ── */
-.photo-bub {
-  max-width: 260px;
-  border-radius: 7.5px;
-  overflow: hidden;
-  position: relative;
-  box-shadow: 0 1px 2px #0006;
-}
-.photo-bub img { width:100%; display:block; }
-.photo-overlay {
-  position: absolute; bottom:0; right:0;
-  padding: 4px 7px 5px;
-  background: linear-gradient(transparent, #0006);
-  display: flex; align-items:center; gap:3px;
-}
-.photo-overlay .btime { color: #fff; }
-.photo-overlay .ticks.blue svg { fill:#53bdeb; }
-.photo-overlay .ticks.grey svg { fill:#ffffffcc; }
-
-/* ── View-once bubble ── */
-.vo-bub {
-  background: #202c33;
-  border-radius: 7.5px;
-  overflow: hidden;
-  box-shadow: 0 1px 2px #0004;
-  min-width: 200px;
-  max-width: 260px;
-}
-.bwrap.r .vo-bub { background: #005c4b; }
-
-.vo-inner {
-  display: flex;
-  align-items: center;
-  padding: 8px 10px;
-  gap: 10px;
-}
-.vo-thumb {
-  width: 48px; height: 48px; border-radius: 50%;
-  background: #2a3942;
-  display:flex; align-items:center; justify-content:center;
-  flex-shrink:0; font-size: 22px;
-}
-.bwrap.r .vo-thumb { background: #00443a; }
-.vo-info { flex:1; }
-.vo-label { font-size:14px; color:#e9edef; font-weight:500; }
-.vo-sub { font-size:12px; color:#8696a0; margin-top:2px; }
-.vo-footer {
-  display:flex; align-items:center; justify-content:flex-end;
-  gap:4px; padding: 0 10px 7px;
+/* Text */
+.btxt{
+  font-size:15px;
+  color:#e9edef;
+  line-height:1.45;
+  white-space:pre-wrap;
+  word-break:break-word;
 }
 
-/* ── Input bar ── */
-.wa-input {
-  background: #202c33;
-  padding: 6px 8px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
+/* Footer — time + ticks float right INSIDE bubble */
+.bfoot{
+  display:inline-flex;
+  align-items:center;
+  gap:3px;
+  float:right;
+  margin-left:6px;
+  margin-top:3px;
+  position:relative;
+  bottom:-1px;
+  /* nudge slightly below baseline */
+  line-height:1;
 }
-.wa-pill {
-  flex:1; background: #2a3942; border-radius: 24px;
-  padding: 9px 14px; display:flex; align-items:center; gap:10px;
-  color:#8696a0; font-size:15px;
+.btime{font-size:11.5px;color:#8696a0;white-space:nowrap;}
+
+/* Ticks SVG — exact WA double checkmark shape */
+.tick svg{display:block;}
+.tick.blue svg{fill:#53bdeb;}
+.tick.grey svg{fill:#8696a0;}
+.tick.one  svg{fill:#8696a0;}
+
+/* ── PHOTO BUBBLE ── */
+.photo-bub{
+  max-width:260px;
+  border-radius:10px;
+  overflow:hidden;
+  position:relative;
+  box-shadow:0 1px 3px #0007;
 }
-.wa-pill span:first-child { font-size:22px; }
-.wa-pill-txt { flex:1; }
-.wa-attach { font-size:22px; }
-.wa-cam { font-size:21px; }
-.wa-mic-btn {
-  width:46px; height:46px; border-radius:50%;
-  background:#00a884; display:flex; align-items:center; justify-content:center;
-  flex-shrink:0; font-size:22px;
+.bwrap.r .photo-bub{border-bottom-right-radius:0;}
+.bwrap.l .photo-bub{border-bottom-left-radius:0;}
+.photo-bub img{width:100%;display:block;max-height:320px;object-fit:cover;}
+.photo-foot{
+  position:absolute;bottom:0;right:0;left:0;
+  padding:20px 7px 5px;
+  background:linear-gradient(transparent,#00000088);
+  display:flex;justify-content:flex-end;align-items:center;gap:3px;
+}
+.photo-foot .btime{color:#ffffffcc;}
+.photo-foot .tick.blue svg{fill:#53bdeb;}
+.photo-foot .tick.grey svg{fill:#ffffffaa;}
+.photo-foot .tick.one  svg{fill:#ffffffaa;}
+
+/* ── VIEW ONCE BUBBLE ── */
+.vo-bub{
+  min-width:200px;max-width:260px;
+  border-radius:10px;overflow:hidden;
+  box-shadow:0 1px 2px #0005;
+}
+.bwrap.r .vo-bub{background:#005c4b;border-bottom-right-radius:0;}
+.bwrap.l .vo-bub{background:#1f2c34;border-bottom-left-radius:0;}
+
+.vo-inner{display:flex;align-items:center;padding:9px 10px 6px;gap:10px;}
+
+/* New / unopened */
+.vo-cam-wrap{
+  width:46px;height:46px;border-radius:50%;
+  background:#00a884;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;font-size:22px;
+}
+.bwrap.r .vo-cam-wrap{background:#007a62;}
+
+/* Opened: spinner circle icon — matches your screenshot exactly */
+.vo-spinner-wrap{
+  width:46px;height:46px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+
+.vo-texts{flex:1;}
+.vo-label-new{font-size:15px;font-weight:500;color:#e9edef;}
+.vo-sub{font-size:12px;color:#8696a0;margin-top:2px;}
+/* "Abierto" text — italic grey, matching your screenshot */
+.vo-label-opened{font-size:15px;font-style:italic;color:#8696a0;font-weight:400;}
+
+.vo-foot{
+  display:flex;justify-content:flex-end;align-items:center;
+  gap:3px;padding:0 10px 7px;
+}
+
+/* ── INPUT BAR ── */
+.wa-input{
+  background:#202c33;padding:7px 8px;
+  display:flex;align-items:center;gap:8px;flex-shrink:0;
+}
+.wa-pill-bar{
+  flex:1;background:#2a3942;border-radius:24px;
+  padding:9px 14px;display:flex;align-items:center;gap:10px;
+}
+.wa-ph{flex:1;color:#8696a0;font-size:15px;}
+.wa-mic{
+  width:46px;height:46px;border-radius:50%;
+  background:#00a884;display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;font-size:22px;
 }
 
 /* modal */
-.modal-bg {
-  display:none; position:fixed; inset:0;
-  background:#000a; z-index:200;
-  align-items:center; justify-content:center;
+.modal-bg{
+  display:none;position:fixed;inset:0;
+  background:#0009;z-index:200;
+  align-items:center;justify-content:center;
 }
-.modal-bg.open { display:flex; }
-.modal {
-  background:#202c33; border-radius:14px;
-  padding:20px; width:320px;
-}
-.modal h3 { font-size:16px; font-weight:700; margin-bottom:10px; }
-.modal p { font-size:13px; color:#8696a0; margin-bottom:14px; }
-.modal button {
-  width:100%; padding:10px; background:#00a884;
-  border:none; border-radius:8px; color:#fff;
-  font-size:14px; font-weight:700; cursor:pointer;
+.modal-bg.open{display:flex;}
+.modal{background:#202c33;border-radius:14px;padding:22px;width:300px;}
+.modal h3{font-size:16px;font-weight:700;margin-bottom:10px;}
+.modal p{font-size:13px;color:#8696a0;line-height:1.7;margin-bottom:14px;}
+.modal button{
+  width:100%;padding:10px;background:#00a884;
+  border:none;border-radius:8px;color:#fff;
+  font-size:14px;font-weight:700;cursor:pointer;
 }
 
-@media(max-width:760px){
-  body { flex-direction:column; overflow:auto; height:auto; }
-  #panel { width:100%; min-width:unset; max-height:none; overflow-y:visible; }
-  #preview { min-height:600px; }
+@media(max-width:740px){
+  body{flex-direction:column;overflow:auto;height:auto;}
+  #panel{width:100%;min-width:unset;}
+  #preview{min-height:580px;}
 }
 </style>
 </head>
@@ -355,16 +308,16 @@ textarea { resize: vertical; min-height: 55px; }
 
 <!-- ═══ PANEL ═══ -->
 <div id="panel">
-  <h2>⚙️ WhatsApp Fake Chat</h2>
+  <div class="p-title">⚙️ WhatsApp Fake Chat</div>
 
   <!-- Contact -->
   <div class="sec">
-    <label>Contacto</label>
+    <div class="lbl">Contacto</div>
     <div class="contact-row">
-      <img id="avatarPreview" src="https://ui-avatars.com/api/?name=J&background=128C7E&color=fff&size=52" title="Clic para cambiar">
+      <img id="avatarPreview" src="https://ui-avatars.com/api/?name=J&background=128C7E&color=fff&size=50" title="Clic para cambiar foto">
       <input type="file" id="avatarFile" accept="image/*" style="display:none">
       <div style="flex:1;display:flex;flex-direction:column;gap:7px">
-        <input type="text" id="cName" value="Joffre Quinteros" placeholder="Nombre" oninput="syncHdr()">
+        <input type="text" id="cName" value="Joffre Quinteros Sr..." placeholder="Nombre" oninput="syncHdr()">
         <input type="text" id="cStatus" value="en línea" placeholder="Estado" oninput="syncHdr()">
       </div>
     </div>
@@ -372,66 +325,66 @@ textarea { resize: vertical; min-height: 55px; }
 
   <!-- Sender -->
   <div class="sec">
-    <label>Quién envía</label>
-    <div class="pill-row">
-      <div class="pill on" id="pYo" onclick="setSender('r')">Yo (verde)</div>
-      <div class="pill" id="pEllos" onclick="setSender('l')">Ellos (gris)</div>
+    <div class="lbl">Quién envía</div>
+    <div class="pills">
+      <div class="pill on" id="pR" onclick="setSender('r')">Yo → verde</div>
+      <div class="pill"    id="pL" onclick="setSender('l')">← Ellos gris</div>
     </div>
   </div>
 
   <!-- Type -->
   <div class="sec">
-    <label>Tipo</label>
-    <div class="pill-row">
+    <div class="lbl">Tipo de mensaje</div>
+    <div class="pills">
       <div class="pill on" id="tTxt" onclick="setType('text')">✏️ Texto</div>
-      <div class="pill" id="tImg" onclick="setType('photo')">📷 Foto</div>
-      <div class="pill" id="tVO" onclick="setType('vo')">👁 Ver 1×</div>
+      <div class="pill"    id="tImg" onclick="setType('photo')">📷 Foto</div>
+      <div class="pill"    id="tVO"  onclick="setType('vo')">👁 Ver 1×</div>
     </div>
   </div>
 
-  <!-- Text section -->
+  <!-- TEXT -->
   <div class="sec" id="secTxt">
-    <label>Mensaje</label>
-    <textarea id="msgTxt" placeholder="Escribe aquí...&#10;(Ctrl+Enter para agregar)"></textarea>
+    <div class="lbl">Mensaje</div>
+    <textarea id="msgTxt" placeholder="Escribe aquí...&#10;Ctrl+Enter para agregar"></textarea>
     <div class="emoji-wrap" id="emojiRow"></div>
   </div>
 
-  <!-- Photo section -->
+  <!-- PHOTO -->
   <div class="sec" id="secImg" style="display:none">
-    <label>Foto</label>
-    <button id="photoFileBtn" onclick="document.getElementById('imgFile').click()">📷 Seleccionar imagen</button>
+    <div class="lbl">Foto</div>
+    <button class="file-btn" id="photoBtn" onclick="document.getElementById('imgFile').click()">📷 Seleccionar imagen</button>
     <input type="file" id="imgFile" accept="image/*" style="display:none">
-    <img id="imgPreview" style="display:none;width:100%;border-radius:8px;margin-top:8px">
+    <img id="imgPrev" style="display:none;width:100%;border-radius:8px;margin-top:8px">
   </div>
 
-  <!-- View-once section -->
+  <!-- VIEW ONCE -->
   <div class="sec" id="secVO" style="display:none">
-    <label>Estado</label>
-    <div class="pill-row">
-      <div class="pill on" id="voNew" onclick="setVO('new')">📷 Sin abrir</div>
-      <div class="pill" id="voOpen" onclick="setVO('opened')">🔓 Abierto</div>
+    <div class="lbl">Estado "ver una vez"</div>
+    <div class="pills">
+      <div class="pill on" id="voN" onclick="setVO('new')">📷 Sin abrir</div>
+      <div class="pill"    id="voO" onclick="setVO('opened')">⏳ Abierto</div>
     </div>
   </div>
 
   <!-- Time & ticks -->
   <div class="sec">
-    <label>Hora & Estado</label>
-    <input type="time" id="msgTime" value="15:07" style="margin-bottom:8px">
-    <div class="pill-row" id="tickRow">
+    <div class="lbl">Hora</div>
+    <input type="time" id="msgTime" value="15:07" style="margin-bottom:9px">
+    <div class="lbl">Estado palomitas</div>
+    <div class="pills" id="tickPills">
       <div class="pill on" id="tk2b" onclick="setTick('read')">✓✓ Azul</div>
-      <div class="pill" id="tk2g" onclick="setTick('sent')">✓✓ Gris</div>
-      <div class="pill" id="tk1" onclick="setTick('one')">✓ Solo</div>
+      <div class="pill"    id="tk2g" onclick="setTick('sent')">✓✓ Gris</div>
+      <div class="pill"    id="tk1"  onclick="setTick('one')">✓ Sola</div>
     </div>
   </div>
 
-  <!-- Add -->
   <div class="sec">
     <button id="btnAdd" onclick="addMsg()">➕ Agregar mensaje</button>
   </div>
 
   <div class="act-row">
     <button id="btnClear" onclick="clearAll()">🗑 Limpiar</button>
-    <button id="btnSave" onclick="showSaveModal()">📸 Capturar</button>
+    <button id="btnSave"  onclick="showModal()">📸 Capturar</button>
   </div>
 </div>
 
@@ -443,34 +396,31 @@ textarea { resize: vertical; min-height: 55px; }
     <div class="wa-hdr">
       <span class="wa-back">‹</span>
       <img id="hdrAvatar" src="https://ui-avatars.com/api/?name=J&background=128C7E&color=fff&size=40">
-      <div class="wa-hdr-info">
-        <div class="wa-hdr-name" id="hdrName">Joffre Quinteros</div>
-        <div class="wa-hdr-status" id="hdrStatus">en línea</div>
+      <div class="hdr-info">
+        <div class="hdr-name" id="hdrName">Joffre Quinteros Sr...</div>
+        <div class="hdr-sub"  id="hdrStatus">en línea</div>
       </div>
-      <div class="wa-hdr-icons">
-        <!-- video icon -->
+      <div class="hdr-icons">
         <svg viewBox="0 0 24 24"><path d="M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 4v-11l-4 4z"/></svg>
-        <!-- phone icon -->
-        <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24 11.47 11.47 0 0 0 3.58.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.58a1 1 0 0 1-.25 1.01l-2.2 2.2z"/></svg>
-        <!-- dots -->
+        <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.45 2.33.7 3.58.7a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.58a1 1 0 0 1-.25 1.01l-2.2 2.2z"/></svg>
         <svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
       </div>
     </div>
 
     <!-- Body -->
     <div class="wa-body" id="chatBody">
-      <div class="date-chip"><span>HOY</span></div>
+      <div class="date-chip"><span>Hoy</span></div>
     </div>
 
     <!-- Input bar -->
     <div class="wa-input">
-      <div class="wa-pill">
-        <span>😊</span>
-        <div class="wa-pill-txt" style="color:#8696a0">Mensaje</div>
-        <span class="wa-attach">📎</span>
-        <span class="wa-cam">📷</span>
+      <div class="wa-pill-bar">
+        <span style="font-size:22px">😊</span>
+        <div class="wa-ph">Mensaje</div>
+        <span style="font-size:21px">📎</span>
+        <span style="font-size:20px">📷</span>
       </div>
-      <div class="wa-mic-btn">🎤</div>
+      <div class="wa-mic">🎤</div>
     </div>
 
   </div>
@@ -479,53 +429,45 @@ textarea { resize: vertical; min-height: 55px; }
 <!-- Modal -->
 <div class="modal-bg" id="modal">
   <div class="modal">
-    <h3>📸 Capturar pantalla</h3>
-    <p>Usa la herramienta de recorte de tu sistema para capturar solo el chat de la derecha:<br><br>
+    <h3>📸 Cómo guardar</h3>
+    <p>Captura solo el chat de la derecha con:<br><br>
     • Windows: <b>Win + Shift + S</b><br>
     • Mac: <b>Cmd + Shift + 4</b><br>
-    • Chrome: clic derecho → Inspeccionar → captura de nodo</p>
+    • Chrome DevTools: clic derecho en el chat → "Capturar screenshot de nodo"</p>
     <button onclick="closeModal()">Cerrar</button>
   </div>
 </div>
 
 <script>
 // ── EMOJIS ──
-const EMOJIS = ['😂','😭','🥹','😩','😤','😡','🤣','❤️','🔥','💀','👀','😳','🤦','💯','🙏','👏','🤡','😍','🤑','😎','🫠','🤙','✌️','💪','🫶','🙈','🎉','💥','🥲','😏','🤭','😬','😒','🫡','🤝','😢','😅','🤔','🫣','😑'];
-document.getElementById('emojiRow').innerHTML = EMOJIS.map(e=>`<span onclick="insEmoji('${e}')">${e}</span>`).join('');
-function insEmoji(e){
-  const t=document.getElementById('msgTxt');
-  const s=t.selectionStart,en=t.selectionEnd;
-  t.value=t.value.slice(0,s)+e+t.value.slice(en);
-  t.selectionStart=t.selectionEnd=s+e.length; t.focus();
-}
+const EMOJIS=['😂','😭','🥹','😩','😤','😡','🤣','❤️','🔥','💀','👀','😳','🤦','💯','🙏','👏','🤡','😍','🤑','😎','🫠','🤙','✌️','💪','🫶','🙈','🎉','💥','🥲','😏','🤭','😬','😒','🫡','🤝','😢','😅','🤔','🫣','😑','🫦','💬','🖤','💚','💙'];
+document.getElementById('emojiRow').innerHTML=EMOJIS.map(e=>`<span onclick="ins('${e}')">${e}</span>`).join('');
+function ins(e){const t=document.getElementById('msgTxt');const s=t.selectionStart,n=t.selectionEnd;t.value=t.value.slice(0,s)+e+t.value.slice(n);t.selectionStart=t.selectionEnd=s+e.length;t.focus();}
 
 // ── AVATAR ──
 document.getElementById('avatarPreview').onclick=()=>document.getElementById('avatarFile').click();
 document.getElementById('avatarFile').onchange=e=>{
-  const f=e.target.files[0]; if(!f)return;
-  const r=new FileReader(); r.onload=ev=>{
-    const src=ev.target.result;
-    document.getElementById('avatarPreview').src=src;
-    document.getElementById('hdrAvatar').src=src;
-  }; r.readAsDataURL(f);
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();r.onload=ev=>{
+    document.getElementById('avatarPreview').src=ev.target.result;
+    document.getElementById('hdrAvatar').src=ev.target.result;
+  };r.readAsDataURL(f);
 };
-
 function syncHdr(){
   document.getElementById('hdrName').textContent=document.getElementById('cName').value||'Contacto';
   document.getElementById('hdrStatus').textContent=document.getElementById('cStatus').value||'';
 }
 
-// ── SENDER ──
-let sender='r';
+// ── STATE ──
+let sender='r',msgType='text',voState='new',tickMode='read',photoSrc=null;
+
 function setSender(s){
   sender=s;
-  document.getElementById('pYo').classList.toggle('on',s==='r');
-  document.getElementById('pEllos').classList.toggle('on',s==='l');
-  document.getElementById('tickRow').style.display=s==='r'?'':'none';
+  document.getElementById('pR').classList.toggle('on',s==='r');
+  document.getElementById('pL').classList.toggle('on',s==='l');
+  document.getElementById('tickPills').style.opacity=s==='r'?'1':'0.4';
+  document.getElementById('tickPills').style.pointerEvents=s==='r'?'':'none';
 }
-
-// ── TYPE ──
-let msgType='text';
 function setType(t){
   msgType=t;
   document.getElementById('tTxt').classList.toggle('on',t==='text');
@@ -535,130 +477,145 @@ function setType(t){
   document.getElementById('secImg').style.display=t==='photo'?'':'none';
   document.getElementById('secVO').style.display=t==='vo'?'':'none';
 }
-
-// ── TICK ──
-let tickMode='read';
+function setVO(s){
+  voState=s;
+  document.getElementById('voN').classList.toggle('on',s==='new');
+  document.getElementById('voO').classList.toggle('on',s==='opened');
+}
 function setTick(m){
   tickMode=m;
-  ['read','sent','one'].forEach(x=>{
-    document.getElementById({read:'tk2b',sent:'tk2g',one:'tk1'}[x]).classList.toggle('on',x===m);
-  });
+  ['read','sent','one'].forEach(x=>document.getElementById({read:'tk2b',sent:'tk2g',one:'tk1'}[x]).classList.toggle('on',x===m));
 }
 
 // ── PHOTO ──
-let photoSrc=null;
 document.getElementById('imgFile').onchange=e=>{
-  const f=e.target.files[0]; if(!f)return;
-  const r=new FileReader(); r.onload=ev=>{
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();r.onload=ev=>{
     photoSrc=ev.target.result;
-    const p=document.getElementById('imgPreview');
-    p.src=photoSrc; p.style.display='block';
-    document.getElementById('photoFileBtn').textContent='✅ Foto lista';
-  }; r.readAsDataURL(f);
+    const p=document.getElementById('imgPrev');p.src=photoSrc;p.style.display='block';
+    document.getElementById('photoBtn').textContent='✅ Foto lista';
+  };r.readAsDataURL(f);
 };
-
-// ── VIEW ONCE ──
-let voState='new';
-function setVO(s){
-  voState=s;
-  document.getElementById('voNew').classList.toggle('on',s==='new');
-  document.getElementById('voOpen').classList.toggle('on',s==='opened');
-}
 
 // ── TIME FORMAT ──
 function fmtTime(val){
   if(!val)return'3:00';
-  const [hh,mm]=val.split(':');
-  let h=parseInt(hh); const m=mm;
+  const[hh,mm]=val.split(':');
+  let h=parseInt(hh);const m=mm;
   const ap=h>=12?'p. m.':'a. m.';
-  if(h>12)h-=12; if(h===0)h=12;
-  return `${h}:${m} ${ap}`;
+  if(h>12)h-=12;if(h===0)h=12;
+  return`${h}:${m} ${ap}`;
 }
 
-// ── TICK SVG ──
-function tickSVG(mode){
-  if(mode==='one'){
-    return `<span class="ticks one"><svg viewBox="0 0 16 11"><path d="M11.071.653a.75.75 0 0 0-1.142.97L11.5 3.66 5.75 9.116 1.57 5.2A.75.75 0 0 0 .53 6.29l4.72 4.406a.75.75 0 0 0 1.054-.032l6.285-6.03a.75.75 0 0 0-.518-1.98z"/></svg></span>`;
+// ── TICK SVG — exact WA shape ──
+function mkTick(mode){
+  // WA double tick path — two overlapping checkmarks
+  const D=`<svg width="16" height="11" viewBox="0 0 16 11" xmlns="http://www.w3.org/2000/svg">
+    <path d="M11.071.653a.75.75 0 0 0-1.142.97L11.5 3.66 5.75 9.116 1.57 5.2A.75.75 0 0 0 .53 6.29l4.72 4.406a.75.75 0 0 0 1.054-.032l6.285-6.03a.75.75 0 0 0-.518-1.981z"/>
+    <path d="M15.071.653a.75.75 0 0 0-1.142.97l1.57 2.037-5.75 5.456-1.08-1.006a.75.75 0 1 0-1.04 1.082l1.62 1.513a.75.75 0 0 0 1.054-.032l6.285-6.03a.75.75 0 0 0-.517-1.99z" opacity=".9"/>
+  </svg>`;
+  const S=`<svg width="13" height="11" viewBox="0 0 13 11" xmlns="http://www.w3.org/2000/svg">
+    <path d="M11.071.653a.75.75 0 0 0-1.142.97L11.5 3.66 5.75 9.116 1.57 5.2A.75.75 0 0 0 .53 6.29l4.72 4.406a.75.75 0 0 0 1.054-.032l6.285-6.03a.75.75 0 0 0-.518-1.981z"/>
+  </svg>`;
+  if(mode==='one') return`<span class="tick one">${S}</span>`;
+  if(mode==='read')return`<span class="tick blue">${D}</span>`;
+  return`<span class="tick grey">${D}</span>`;
+}
+
+// ── VIEW-ONCE SPINNER SVG — matches your screenshot ──
+function voSpinnerSVG(){
+  return`<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+    <!-- outer partial ring -->
+    <circle cx="20" cy="20" r="17" fill="none" stroke="#4a5568" stroke-width="2.5"
+      stroke-dasharray="75 32" stroke-linecap="round"
+      transform="rotate(-100 20 20)"/>
+    <!-- inner partial ring -->
+    <circle cx="20" cy="20" r="10" fill="none" stroke="#4a5568" stroke-width="2.5"
+      stroke-dasharray="42 21" stroke-linecap="round"
+      transform="rotate(-80 20 20)"/>
+  </svg>`;
+}
+
+// ── TAIL ──
+function tail(side){
+  const fill=side==='r'?'%23005c4b':'%231f2c34';
+  if(side==='r'){
+    return`<div class="tail-r"><svg width="8" height="13" viewBox="0 0 8 13"><path d="M1 0 C1 6.5 7.5 9.5 8 13 L0 13 Z" fill="${side==='r'?'#005c4b':'#1f2c34'}"/></svg></div>`;
+  } else {
+    return`<div class="tail-l"><svg width="8" height="13" viewBox="0 0 8 13"><path d="M1 0 C1 6.5 7.5 9.5 8 13 L0 13 Z" fill="#1f2c34" transform="scale(-1,1) translate(-8,0)"/></svg></div>`;
   }
-  const cls = mode==='read'?'blue':'grey';
-  return `<span class="ticks ${cls}"><svg viewBox="0 0 16 11"><path d="M11.071.653a.75.75 0 0 0-1.142.97L11.5 3.66 5.75 9.116 1.57 5.2A.75.75 0 0 0 .53 6.29l4.72 4.406a.75.75 0 0 0 1.054-.032l6.285-6.03a.75.75 0 0 0-.518-1.98z"/><path d="M15.071.653a.75.75 0 0 0-1.142.97l1.57 2.037-5.75 5.456-1.08-1.006a.75.75 0 0 0-1.04 1.082l1.62 1.513a.75.75 0 0 0 1.054-.032l6.285-6.03a.75.75 0 0 0-.517-1.99z"/></svg></span>`;
 }
 
-// ── TAIL SVG ──
-const tailSVG = `<div class="tail"><svg viewBox="0 0 8 13" xmlns="http://www.w3.org/2000/svg"><path d="M1 0 C1 6 7 9 8 13 L0 13 Z"/></svg></div>`;
-
-// ── ADD MESSAGE ──
+// ── ADD MSG ──
 function addMsg(){
   const body=document.getElementById('chatBody');
   const time=fmtTime(document.getElementById('msgTime').value);
-  const side=sender;
-  const showTicks=side==='r';
-
-  let html='';
+  const s=sender;
+  const hasTick=s==='r';
 
   if(msgType==='text'){
     const txt=document.getElementById('msgTxt').value.trim();
     if(!txt){alert('Escribe un mensaje');return;}
-    const ticks=showTicks?tickSVG(tickMode):'';
-    // spacer pushes footer to right
-    const footer=`<div class="bubble-footer"><span class="btime">${time}</span>${ticks}</div>`;
-    if(side==='r'){
-      html=`<div class="bwrap r">
-        <div class="bubble"><span class="bubble-txt">${esc(txt)}</span>${footer}</div>${tailSVG}</div>`;
+    const ticks=hasTick?mkTick(tickMode):'';
+    const foot=`<div class="bfoot"><span class="btime">${time}</span>${ticks}</div>`;
+    let html;
+    if(s==='r'){
+      html=`<div class="bwrap r"><div class="bubble"><span class="btxt">${esc(txt)}</span>${foot}</div>${tail('r')}</div>`;
     } else {
-      html=`<div class="bwrap l">${tailSVG}
-        <div class="bubble"><span class="bubble-txt">${esc(txt)}</span>${footer}</div></div>`;
+      html=`<div class="bwrap l">${tail('l')}<div class="bubble"><span class="btxt">${esc(txt)}</span>${foot}</div></div>`;
     }
+    body.insertAdjacentHTML('beforeend',html);
 
   } else if(msgType==='photo'){
     if(!photoSrc){alert('Selecciona una foto');return;}
-    const ticks=showTicks?tickSVG(tickMode):'';
-    const overlay=`<div class="photo-overlay"><span class="btime">${time}</span>${ticks}</div>`;
-    if(side==='r'){
-      html=`<div class="bwrap r"><div class="photo-bub"><img src="${photoSrc}">${overlay}</div>${tailSVG}</div>`;
+    const ticks=hasTick?mkTick(tickMode):'';
+    const foot=`<div class="photo-foot"><span class="btime">${time}</span>${ticks}</div>`;
+    let html;
+    if(s==='r'){
+      html=`<div class="bwrap r"><div class="photo-bub"><img src="${photoSrc}">${foot}</div>${tail('r')}</div>`;
     } else {
-      html=`<div class="bwrap l">${tailSVG}<div class="photo-bub"><img src="${photoSrc}">${overlay}</div></div>`;
+      html=`<div class="bwrap l">${tail('l')}<div class="photo-bub"><img src="${photoSrc}">${foot}</div></div>`;
     }
+    body.insertAdjacentHTML('beforeend',html);
 
   } else if(msgType==='vo'){
-    const ticks=showTicks?tickSVG(tickMode):'';
-    const opened=voState==='opened';
-    const icon=opened?'🔓':'📷';
-    const lbl=opened?'<span style="color:#8696a0;font-size:13px">Abierto</span>':'<span style="font-size:13px;color:#e9edef">Foto</span>';
-    const sub=opened?'':'<div class="vo-sub">Solo se puede ver una vez</div>';
-    html=`<div class="bwrap ${side}">
-      ${side==='l'?tailSVG:''}
-      <div class="vo-bub">
-        <div class="vo-inner">
-          <div class="vo-thumb" style="${opened?'opacity:.45':''}"><span style="font-size:22px">${icon}</span></div>
-          <div class="vo-info">${lbl}${sub}</div>
+    const ticks=hasTick?mkTick(tickMode):'';
+    const foot=`<div class="vo-foot"><span class="btime">${time}</span>${ticks}</div>`;
+    let inner='';
+    if(voState==='new'){
+      inner=`<div class="vo-inner">
+        <div class="vo-cam-wrap">📷</div>
+        <div class="vo-texts">
+          <div class="vo-label-new">Foto</div>
+          <div class="vo-sub">Solo se puede ver una vez</div>
         </div>
-        <div class="vo-footer"><span class="btime">${time}</span>${ticks}</div>
-      </div>
-      ${side==='r'?tailSVG:''}
-    </div>`;
+      </div>`;
+    } else {
+      // OPENED — matches your screenshot: spinner + italic "Abierto"
+      inner=`<div class="vo-inner">
+        <div class="vo-spinner-wrap">${voSpinnerSVG()}</div>
+        <div class="vo-texts">
+          <div class="vo-label-opened">Abierto</div>
+        </div>
+      </div>`;
+    }
+    let html;
+    if(s==='r'){
+      html=`<div class="bwrap r"><div class="vo-bub">${inner}${foot}</div>${tail('r')}</div>`;
+    } else {
+      html=`<div class="bwrap l">${tail('l')}<div class="vo-bub">${inner}${foot}</div></div>`;
+    }
+    body.insertAdjacentHTML('beforeend',html);
   }
 
-  body.insertAdjacentHTML('beforeend',html);
   body.scrollTop=body.scrollHeight;
 }
 
-function esc(s){
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
-}
-
-function clearAll(){
-  if(!confirm('¿Borrar todo?'))return;
-  document.getElementById('chatBody').innerHTML='<div class="date-chip"><span>HOY</span></div>';
-}
-
-function showSaveModal(){ document.getElementById('modal').classList.add('open'); }
-function closeModal(){ document.getElementById('modal').classList.remove('open'); }
-
-// Ctrl+Enter
-document.getElementById('msgTxt').addEventListener('keydown',e=>{
-  if(e.key==='Enter'&&e.ctrlKey)addMsg();
-});
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');}
+function clearAll(){if(!confirm('¿Borrar todo?'))return;document.getElementById('chatBody').innerHTML='<div class="date-chip"><span>Hoy</span></div>';}
+function showModal(){document.getElementById('modal').classList.add('open');}
+function closeModal(){document.getElementById('modal').classList.remove('open');}
+document.getElementById('msgTxt').addEventListener('keydown',e=>{if(e.key==='Enter'&&e.ctrlKey)addMsg();});
 </script>
 </body>
 </html>
