@@ -176,20 +176,30 @@ textarea{resize:vertical;min-height:50px;}
 
 /* FOOTER — time+ticks inline float-right inside bubble */
 .bfoot{
-  display:inline-flex;align-items:flex-end;gap:3px;
+  display:inline-flex;align-items:center;gap:2px;
   float:right;margin-left:6px;margin-top:2px;
   position:relative;top:3px;margin-bottom:-1px;
 }
-.btime{font-size:11px;white-space:nowrap;line-height:1;}
-.brow.r .btime{color:#9bb0aa;}
-.brow.l .btime{color:#8696a0;}
+/* TIME — thin, correct green-grey tint inside sent bubble */
+.btime{
+  font-size:11.5px;
+  white-space:nowrap;
+  line-height:1;
+  font-weight:300;
+  letter-spacing:0.1px;
+}
+.brow.r .btime{color:#9bb5ae;}  /* green-grey tint on dark green bubble */
+.brow.l .btime{color:#8696a0;}  /* plain grey on dark bubble */
 
-/* TICKS */
-.tick{display:inline-flex;align-items:center;}
+/* TICKS — positioned inline with time */
+.tick{display:inline-flex;align-items:center;position:relative;top:0.5px;}
 .tick svg{display:block;}
-.tick.blue svg{fill:#53bdeb;}
-.tick.grey svg{fill:#8696a0;}
-.tick.one  svg{fill:#8696a0;}
+.tick.blue{color:#53bdeb;}
+.tick.grey{color:#8696a0;}
+.tick.one {color:#8696a0;}
+/* photo overlay overrides */
+.photo-foot .tick.blue{color:#53bdeb;}
+.photo-foot .tick.grey,.photo-foot .tick.one{color:#ffffffaa;}
 
 /* ── PHOTO BUBBLE ── */
 .photo-bub{
@@ -205,9 +215,7 @@ textarea{resize:vertical;min-height:50px;}
   background:linear-gradient(transparent,#00000099);
   display:flex;justify-content:flex-end;align-items:center;gap:3px;
 }
-.photo-foot .btime{color:#ffffffcc;font-size:11px;}
-.photo-foot .tick.blue svg{fill:#53bdeb;}
-.photo-foot .tick.grey svg,.photo-foot .tick.one svg{fill:#ffffffaa;}
+.photo-foot .btime{color:#ffffffcc;font-size:11px;font-weight:300;}
 
 /* ── VIEW-ONCE BUBBLE ── */
 /* NEW (unopened): wide bubble with camera icon + text + subtext */
@@ -474,31 +482,33 @@ function fmt(v){
 
 // TICK SVG — WhatsApp exact double-check shape
 function mkTick(m){
-  const dbl=`<svg width="18" height="11" viewBox="0 0 18 11">
-    <path d="M17.394.603a.748.748 0 0 0-1.07.108L8.3 10.274 4.13 6.155a.75.75 0 0 0-1.06 1.06l4.77 4.77a.748.748 0 0 0 1.101-.058l8.562-10.21a.748.748 0 0 0-.109-1.114z" opacity=".55"/>
-    <path d="M12.896.603a.748.748 0 0 0-1.07.108L3.8 10.274.13 6.655a.75.75 0 1 0-1.06 1.06l4.27 4.27a.748.748 0 0 0 1.1-.058L12.003 1.717a.748.748 0 0 0-.107-1.114z"/>
+  // Double check — exact WA shape: two thin checkmarks, second offset right
+  // First check slightly transparent, second fully opaque — both same path offset by ~4px
+  const dbl=`<svg width="16" height="11" viewBox="0 0 16 11" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <!-- Back check (slightly faded) -->
+    <path opacity="0.5" d="M 10.5 0.8 L 4.5 8.5 L 1.5 5.5 L 0.5 6.5 L 4.5 10.5 L 11.5 1.8 Z"/>
+    <!-- Front check (full opacity, offset right) -->
+    <path d="M 14.5 0.8 L 8.5 8.5 L 5.5 5.5 L 4.5 6.5 L 8.5 10.5 L 15.5 1.8 Z"/>
   </svg>`;
-  const sgl=`<svg width="13" height="11" viewBox="0 0 13 11">
-    <path d="M12.396.603a.748.748 0 0 0-1.07.108L3.8 10.274.13 6.655a.75.75 0 1 0-1.06 1.06l4.27 4.27a.748.748 0 0 0 1.1-.058L12.003 1.717a.748.748 0 0 0-.107-1.114z"/>
+  const sgl=`<svg width="11" height="11" viewBox="0 0 11 11" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M 10.5 0.8 L 4.5 8.5 L 1.5 5.5 L 0.5 6.5 L 4.5 10.5 L 11.5 1.8 Z"/>
   </svg>`;
   if(m==='one') return`<span class="tick one">${sgl}</span>`;
   if(m==='read')return`<span class="tick blue">${dbl}</span>`;
   return`<span class="tick grey">${dbl}</span>`;
 }
 
-// VIEW-ONCE "ABIERTO" ICON — exact WA shape from screenshots:
-// Two concentric partial arcs forming a "C" / open circle shape
-// Outer arc is larger, inner arc smaller — both grey with gap on same side
+// VIEW-ONCE "ABIERTO" ICON — exact WA shape:
+// Large C arc (open on right side) + 3 small dots fading on the open side
 function voSpinner(){
-  return`<svg width="38" height="38" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg">
-    <!-- Outer arc: ~270° circle, gap at top-right -->
-    <path d="M 19 5
-             A 14 14 0 1 1 8.5 30.1"
-      fill="none" stroke="#8696a0" stroke-width="3.2" stroke-linecap="round"/>
-    <!-- Inner arc: ~270° circle, gap at top-right, same angle -->
-    <path d="M 19 11
-             A 8 8 0 1 1 13.3 27.1"
-      fill="none" stroke="#8696a0" stroke-width="3.2" stroke-linecap="round"/>
+  return`<svg width="22" height="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
+    <!-- Main C arc — open on right ~80deg gap -->
+    <path d="M 18.5 6.5 A 9 9 0 1 0 18.5 15.5"
+      fill="none" stroke="#8696a0" stroke-width="2.8" stroke-linecap="round"/>
+    <!-- 3 dots on the open/right side, fading in size -->
+    <circle cx="19.5" cy="9"   r="1.5" fill="#8696a0" opacity="0.85"/>
+    <circle cx="20.8" cy="11"  r="1.1" fill="#8696a0" opacity="0.55"/>
+    <circle cx="19.5" cy="13"  r="0.8" fill="#8696a0" opacity="0.30"/>
   </svg>`;
 }
 
@@ -548,7 +558,14 @@ function addMsg(){
     } else {
       // OPENED = plain normal bubble, same as text bubble
       // Small inline "C" arc icon + italic "Abierto" text, same size as any message
-      const openIcon=`<svg width="18" height="18" viewBox="0 0 18 18" style="display:inline-block;vertical-align:middle;margin-right:4px;position:relative;top:-1px"><path d="M 9 2 A 7 7 0 1 1 3.5 14.06" fill="none" stroke="#8696a0" stroke-width="2.5" stroke-linecap="round"/><path d="M 9 5 A 4 4 0 1 1 6 12.46" fill="none" stroke="#8696a0" stroke-width="2.2" stroke-linecap="round"/></svg>`;
+      // C arc + 3 fading dots — exact WA "abierto" icon
+      const openIcon=`<svg width="20" height="20" viewBox="0 0 22 22" style="display:inline-block;vertical-align:middle;margin-right:5px;position:relative;top:-1px" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 19 5.8 A 9.5 9.5 0 1 0 19 16.2"
+          fill="none" stroke="#8696a0" stroke-width="2.6" stroke-linecap="round"/>
+        <circle cx="19.8" cy="8.2"  r="1.55" fill="#8696a0"/>
+        <circle cx="21.2" cy="11"   r="1.15" fill="#8696a0" opacity="0.65"/>
+        <circle cx="20.0" cy="13.8" r="0.8"  fill="#8696a0" opacity="0.35"/>
+      </svg>`;
       const foot=`<div class="bfoot"><span class="btime">${time}</span>${ticks}</div>`;
       const content=`${openIcon}<span class="vo-lopen">Abierto</span>`;
       html=`<div class="brow ${s} has-tail"><div class="bwrap"><div class="bubble">${content}${foot}</div></div></div>`;
